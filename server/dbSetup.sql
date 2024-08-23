@@ -6,3 +6,22 @@ CREATE TABLE IF NOT EXISTS accounts(
   email varchar(255) UNIQUE COMMENT 'User Email',
   picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8mb4 COMMENT '';
+
+
+CREATE TABLE keeps(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(1000) NOT NULL,
+  img VARCHAR(1000) NOT NULL,
+  views INT UNSIGNED DEFAULT 0 NOT NULL,
+  kept INT UNSIGNED NOT NULL Default 0,
+  creatorId VARCHAR(255) NOT NULL,
+  FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+);
+
+ALTER TABLE accounts
+ADD coverImg VARCHAR(1000);
+
+DROP TABLE keeps;
