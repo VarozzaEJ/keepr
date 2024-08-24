@@ -1,37 +1,64 @@
 <script setup>
+import { AppState } from '@/AppState.js';
+import KeepCard from '@/components/globals/KeepCard.vue';
+import { keepsService } from '@/services/KeepsService.js';
+import Pop from '@/utils/Pop.js';
+import { computed, onMounted } from 'vue';
 
+
+const keeps = computed(() => AppState.keeps)
+const account = computed(() => AppState.account)
+
+
+onMounted(() => {
+  getAllKeeps()
+})
+
+
+
+async function getAllKeeps() {
+  try {
+    await keepsService.getAllKeeps()
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
 </script>
 
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 card align-items-center shadow rounded elevation-3">
-      <img src="@/assets/img/cw-circle-logo.png" alt="CodeWorks Logo"
-        class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="container-fluid full-vh">
+    <div class="row mt-3 full-vh">
+      <div class="col-md-12 mobile-masonry  masonry">
+        <div class="break-inside" v-for="keep in keeps" :key="keep.id">
+          <KeepCard :keepProp='keep' />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
+@media screen and (min-width: 769px) {
+  .masonry {
+    columns: 228px;
+    column-gap: 1em;
+    column-fill: balance;
+  }
+}
 
-  .home-card {
-    width: clamp(500px, 50vw, 100%);
+.full-vh {}
 
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
+.break-inside {
+  break-inside: avoid;
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-masonry {
+    columns: 150px;
+    column-gap: 1em;
+    column-fill: balance;
+    break-inside: avoid;
   }
 }
 </style>

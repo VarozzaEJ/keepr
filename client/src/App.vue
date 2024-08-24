@@ -1,6 +1,8 @@
 <script setup>
 import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
+import KeepModal from './components/globals/KeepModal.vue';
+import CreateKeepModal from './components/globals/CreateKeepModal.vue';
 
 </script>
 
@@ -11,7 +13,8 @@ import { AppState } from './AppState.js';
   <main>
     <router-view />
   </main>
-
+  <KeepModal />
+  <CreateKeepModal />
 </template>
 
 <style lang="scss">
