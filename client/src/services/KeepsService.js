@@ -5,7 +5,7 @@ import { Keep } from "@/models/Keep.js"
 
 class KeepsService {
     async deleteKeep(keepId) {
-        await api.delete(`api/keeps/${keepId}`)
+        const response = await api.delete(`api/keeps/${keepId}`)
         const foundKeep = AppState.keeps.findIndex(keep => keep.id == keepId)
         AppState.keeps.splice(foundKeep, 1)
     }

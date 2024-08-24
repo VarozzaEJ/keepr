@@ -3,6 +3,7 @@
 
 
 
+
 namespace keepr.Services;
 
 public class VaultsService
@@ -28,16 +29,23 @@ public class VaultsService
       return $"{vault.Name} was deleted successfully";
     }
 
+
     internal Vault GetVaultById(int vaultId, string userId)
     {
       
-       Vault vault = GetVaultById(vaultId);
+    Vault vault = GetVaultById(vaultId);
     if (vault.CreatorId != userId && vault.IsPrivate == true)
     {
       throw new Exception($"No vault found with the id of {vaultId} ");
     }
 
     return vault;
+    }
+
+    internal List<Vault> GetVaultsByCreatorId(string creatorId)
+    {
+      List<Vault> vaults = _vaultsRepository.GetVaultsForAccount(creatorId);
+      return vaults;
     }
 
     internal Vault UpdateVault(Vault vaultData, int vaultId, string userId)

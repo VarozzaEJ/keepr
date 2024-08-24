@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { Keep } from '@/models/Keep.js';
+import { accountService } from '@/services/AccountService.js';
 import { keepsService } from '@/services/KeepsService.js';
 import Pop from '@/utils/Pop.js';
 import { computed } from 'vue';
@@ -12,6 +13,15 @@ const account = computed(() => AppState.account)
 async function setActiveKeep(keepId) {
     try {
         keepsService.setActiveKeep(keepId)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
+async function setActiveProfile(creatorId) {
+    try {
+        accountService.setActiveProfile(creatorId)
     }
     catch (error) {
         Pop.error(error);
@@ -33,17 +43,22 @@ async function deleteKeep(keepId) {
 
 
 <template>
-    <main class="container-fluid my-md-5 my-2 keep-bg-img dynamic-width text-dark">
+    <main class="container-fluid my-md-1 my-2 keep-bg-img dynamic-width text-dark">
         <div class="d-flex justify-content-end"><i @click="deleteKeep(keepProp.id)"
                 v-if="account?.id == keepProp.creatorId" role="button" class="mdi mdi-close-circle text-danger"></i>
         </div>
-        <div class="row " @click="setActiveKeep(keepProp.id)" data-bs-toggle="modal" data-bs-target="#keepModal">
+        <div class="row ">
             <div class="col-12">
-                <img class="img-fluid rounded" :src="keepProp.img" :alt="`A Keep made by ${keepProp.creator.name}`">
+                <img role="button" @click="setActiveKeep(keepProp.id)" data-bs-toggle="modal"
+                    data-bs-target="#keepModal" class="img-fluid rounded img" :src="keepProp.img"
+                    :alt="`A Keep made by ${keepProp.creator.name}`">
             </div>
             <div class="d-flex relative desktop-text mobile-text justify-content-between">
                 <span class=" ms-2 text-light text-shadow">{{ keepProp.name }}</span>
-                <img class="creator-picture me-1" :src="keepProp.creator.picture" :alt="keepProp.creator.name">
+                <router-link :to="{ name: 'Profile', params: { profileId: keepProp.creatorId } }">
+                    <img @click="setActiveProfile(keepProp.creatorId)" role='button' class="creator-picture me-1"
+                        :src="keepProp.creator.picture" :alt="keepProp.creator.name">
+                </router-link>
             </div>
         </div>
     </main>
@@ -51,9 +66,14 @@ async function deleteKeep(keepId) {
 
 
 <style lang="scss" scoped>
+.img {
+    height: 100%;
+}
+
 .keep-bg-img {
     aspect-ratio: 1/1;
-    width: 100%
+    width: 100%;
+    height: 100%;
 }
 
 i {

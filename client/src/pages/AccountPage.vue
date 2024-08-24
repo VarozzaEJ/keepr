@@ -1,9 +1,25 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState.js';
+import VaultCard from '@/components/globals/VaultCard.vue';
+import { accountService } from '@/services/AccountService.js';
+import Pop from '@/utils/Pop.js';
 
 const account = computed(() => AppState.account)
+const vaults = computed(() => AppState.profileVaults)
 
+watch(() => account, () => {
+  getVaultsByCreatorId(account.value.id)
+})
+
+async function getVaultsByCreatorId(accountId) {
+  try {
+    accountService.getVaultsByCreatorId(accountId)
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
 </script>
 
 <template>
@@ -15,60 +31,62 @@ const account = computed(() => AppState.account)
             :title="`${account.name}`">
 
         </div>
-        <div class="row d-flex justify-content-end">
-          <div class="col-2 d-flex justify-content-center">
-            <img class="img-fluid creator-picture" :src="account.picture" :alt="`A picture of ${account.name}`">
+      </div>
 
-          </div>
-          <div class="col-5">
-            <div class="dropdown-center flex-grow-1 d-flex justify-content-end">
-              <p class="mdi mdi-dots-horizontal fs-1" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+      <div class="row d-flex justify-content-end">
+        <div class="col-2 d-flex justify-content-center">
+          <img class="img-fluid creator-picture" :src="account.picture" :alt="`A picture of ${account.name}`">
 
-              </p>
-              <div class="dropdown-menu ">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-12 d-flex justify-content-center">
-                      <button class="btn w-75 d-flex justify-content-center mb-2 btn-danger"><i
-                          class="mdi mdi-delete-forever">Delete</i></button>
-                    </div>
-                    <div class="col-12 d-flex justify-content-center">
-                      <button class="btn w-75 text-center mb-1 btn-success"><i class="mdi mdi-file"></i>Edit</button>
-                    </div>
+        </div>
+        <div class="col-5">
+          <div class="dropdown-center flex-grow-1 d-flex justify-content-end">
+            <p class="mdi mdi-dots-horizontal fs-1" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+
+            </p>
+            <div class="dropdown-menu ">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-center">
+                    <button class="btn w-75 d-flex justify-content-center mb-2 btn-danger"><i
+                        class="mdi mdi-delete-forever">Delete</i></button>
+                  </div>
+                  <div class="col-12 d-flex justify-content-center">
+                    <button class="btn w-75 text-center mb-1 btn-success"><i class="mdi mdi-file"></i>Edit</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-12 d-flex  justify-content-center">
-            <div class="row d-flex flex-column">
-              <div class="d-flex justify-content-center">
-                <span class="fw-bold fs-2">{{ account.name }}</span>
-              </div>
-              <div class="d-flex justify-content-center">
-                <span class="me-2">1 Vault</span>
-                <span>|</span>
-                <span class="ms-2"> 14 Keeps</span>
-              </div>
+        </div>
+        <div class="col-12 d-flex  justify-content-center">
+          <div class="row d-flex flex-column">
+            <div class="d-flex justify-content-center">
+              <span class="fw-bold fs-2">{{ account.name }}</span>
+            </div>
+            <div class="d-flex justify-content-center">
+              <span class="me-2">{{ vaults.length }} Vaults</span>
+              <span>|</span>
+              <span class="ms-2"> 14 Keeps</span>
             </div>
           </div>
-          <div class="col-12">
-            <div class="row">
-              <span class="fw-bold fs-2">Vaults</span>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <!-- Vault cards go here -->
-              </div>
-            </div>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <span class="fw-bold fs-2">Vaults</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
+          <!-- Vault cards go here -->
+          <VaultCard :vaultProp="vault" />
+        </div>
+      </div>
 
-          </div>
-          <div class="col-12">
-            <div class="row">
-              <span class="fw-bold fs-2">Keeps</span>
-            </div>
-          </div>
+      <div class="col-12">
+        <div class="row">
+          <span class="fw-bold fs-2">Keeps</span>
         </div>
       </div>
 
@@ -83,7 +101,7 @@ const account = computed(() => AppState.account)
 .img {
   max-width: 100%;
   width: 100%;
-  height: 100%;
+  height: 250px;
 }
 
 .creator-picture {
