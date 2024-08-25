@@ -9,6 +9,7 @@ import { useRoute } from 'vue-router';
 const profile = computed(() => AppState.activeProfile)
 const route = useRoute()
 const vaults = computed(() => AppState.profileVaults)
+const keeps = computed(() => AppState.profileKeeps)
 
 
 watch(() => route.params.profileId, () => {

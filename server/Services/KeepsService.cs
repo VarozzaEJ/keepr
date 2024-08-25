@@ -54,4 +54,10 @@ public class KeepsService
       if(keep == null) throw new Exception($"No keep found with the id of ${keepId}");
       return keep;
     }
+
+    internal List<Keep> GetKeepsByProfileId(string profileId)
+    {
+      List<Keep> keeps = _keepsRepository.GetKeepsByProfileId(profileId);
+      return keeps;
+    }
 }

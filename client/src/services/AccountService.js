@@ -6,11 +6,16 @@ import { api } from './AxiosService'
 import { Vault } from '@/models/Vault.js'
 
 class AccountService {
-  async getVaultsByCreatorId(creatorId) {
+  async getVaultsByCreatorId(profileId) {
     AppState.profileVaults = []
-    const response = await api.get(`account/${creatorId}/vaults`)
+    const response = await api.get(`account/${profileId}/vaults`)
     const profileVaults = response.data.map(vaultPOJO => new Vault(vaultPOJO))
     AppState.profileVaults = profileVaults
+  }
+
+  async getKeepsByCreatorId(profileId) {
+    const response = await api.get(`account/${profileId}/keeps`)
+    logger.log(response.data)
   }
   async setActiveProfile(creatorId) {
     AppState.activeProfile = null

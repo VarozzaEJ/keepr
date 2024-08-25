@@ -18,5 +18,8 @@ export const AppState = reactive({
 
   /** @type {import('./models/Profile.js').Profile} user info from the database*/
   activeProfile: null,
+
+  /** @type {import('./models/Keep.js').Keep[]} user info from the database*/
+  profileKeeps: [],
 })
 

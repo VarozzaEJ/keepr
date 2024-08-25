@@ -9,12 +9,14 @@ public class AccountController : ControllerBase
   private readonly AccountService _accountService;
   private readonly Auth0Provider _auth0Provider;
   private readonly VaultsService _vaultsService;
+  private readonly KeepsService _keepsService;
 
-    public AccountController(AccountService accountService, Auth0Provider auth0Provider, VaultsService vaultsService)
+    public AccountController(AccountService accountService, Auth0Provider auth0Provider, VaultsService vaultsService, KeepsService keepsService)
     {
         _accountService = accountService;
         _auth0Provider = auth0Provider;
         _vaultsService = vaultsService;
+        _keepsService = keepsService;
     }
 
     [HttpGet]
@@ -54,6 +56,20 @@ public class AccountController : ControllerBase
       List<Vault> vaults = _vaultsService.GetVaultsByCreatorId(creatorId);
       return Ok(vaults);
 
+      }
+      catch (Exception exception)
+      {
+        return BadRequest(exception.Message);
+      }
+    }
+
+    [HttpGet("{profileId}/keeps")]
+    public ActionResult<List<Keep>> GetKeepsByProfileId(string profileId)
+    {
+      try 
+      {
+      List<Keep> keeps = _keepsService.GetKeepsByProfileId(profileId);
+      return Ok(keeps);
       }
       catch (Exception exception)
       {

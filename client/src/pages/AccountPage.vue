@@ -4,17 +4,36 @@ import { AppState } from '../AppState.js';
 import VaultCard from '@/components/globals/VaultCard.vue';
 import { accountService } from '@/services/AccountService.js';
 import Pop from '@/utils/Pop.js';
+import { useRoute } from 'vue-router';
+import { router } from '@/router.js';
 
 const account = computed(() => AppState.account)
 const vaults = computed(() => AppState.profileVaults)
+const route = useRoute()
 
-watch(() => account, () => {
+watch(() => AppState.account, () => {
   getVaultsByCreatorId(account.value.id)
+  getKeepsByProfileId(account.value.id)
 })
+
+if (route.fullPath.includes('account') && AppState.account != null) {
+  getKeepsByProfileId(account.value?.id)
+  getVaultsByCreatorId(account.value?.id)
+}
+
 
 async function getVaultsByCreatorId(accountId) {
   try {
     accountService.getVaultsByCreatorId(accountId)
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
+
+async function getKeepsByProfileId(accountId) {
+  try {
+    accountService.getKeepsByCreatorId(accountId)
   }
   catch (error) {
     Pop.error(error);
@@ -92,7 +111,9 @@ async function getVaultsByCreatorId(accountId) {
 
     </div>
     <div v-else>
-      <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
+      <div class="row d-flex justify-content-center">
+        <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
+      </div>
     </div>
   </div>
 </template>
