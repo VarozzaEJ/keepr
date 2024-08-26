@@ -9,8 +9,7 @@ const account = computed(() => AppState.account)
 
 
 <template>
-    <main v-if="account.id != vaultProp.creatorId && !vaultProp.isPrivate" role="button"
-        class="container-fluid vault-bg-img mb-3">
+    <main role="button" class="container-fluid vault-bg-img mb-3">
         <div class="row">
             <div class="col-12 absolute d-flex justify-content-between">
                 <span class="fs-5 text-light text-shadow">{{ vaultProp.name }}</span>
