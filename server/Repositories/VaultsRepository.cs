@@ -2,7 +2,7 @@
 
 
 
-namespace keepr.Services;
+namespace keepr.Repositories;
 
 public class VaultsRepository 
 {

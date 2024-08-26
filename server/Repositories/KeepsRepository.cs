@@ -4,6 +4,8 @@
 
 
 
+
+
 namespace keepr.Repositories;
 
 public class KeepsRepository
@@ -106,6 +108,51 @@ public class KeepsRepository
       ;";
 
       List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, JoinCreator, new {profileId}).ToList();
+      return keeps;
+    }
+
+    internal List<Keep> GetKeepsInPrivateVault(int privateVaultId, string userId)
+    {
+      string sql = @"
+        SELECT
+       `vaultKeeps`.*,
+keeps.*,
+vaults.*,
+accounts.*
+FROM `vaultKeeps`
+JOIN keeps ON keeps.id = vaultKeeps.`keepId`
+JOIN vaults ON vaults.id = vaultKeeps.vaultId
+JOIN accounts ON accounts.id = keeps.`creatorId`
+        WHERE vaultKeeps.vaultId = @privateVaultId
+      ;";
+
+      List<Keep> keeps = _db.Query<VaultKeep, Keep,Vault, Profile, Keep>(sql, (vaultKeep, keep, vault, profile) => {
+        keep.Creator = profile;
+        keep.VaultKeepId = vaultKeep.Id;
+        return keep;
+      }, new {privateVaultId}).ToList();
+      return keeps;
+      
+    }
+
+    internal List<Keep> GetKeepsInPublicVault(int vaultId)
+    {
+      string sql = @"
+     SELECT 
+`vaultKeeps`.*,
+keeps.*,
+accounts.*
+FROM `vaultKeeps`
+JOIN keeps ON keeps.id = vaultKeeps.`keepId`
+JOIN accounts ON accounts.id = keeps.`creatorId`
+WHERE `vaultKeeps`.vaultId = @vaultId
+      ;";
+
+      List<Keep> keeps = _db.Query<VaultKeep, Keep, Profile, Keep>(sql, (vaultKeep, keep, profile) => {
+        keep.Creator = profile;
+        keep.VaultKeepId = vaultKeep.Id;
+        return keep;
+      }, new {vaultId}).ToList();
       return keeps;
     }
 

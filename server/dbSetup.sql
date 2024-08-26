@@ -33,7 +33,41 @@ CREATE TABLE vaults(
   FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 );
 
-ALTER TABLE accounts
-ADD coverImg VARCHAR(1000);
+CREATE TABLE vaultKeeps(
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+  keepId INT NOT NULL,
+  vaultId INt NOT NULL,
+  creatorId VARCHAR(255) NOT NULL,
+  FOREIGN KEY (keepId) REFERENCES keeps (id) ON DELETE CASCADE,
+  FOREIGN KEY (vaultId) REFERENCES vaults (id) ON DELETE CASCADE,
+  FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+);
+ALTER TABLE keeps
+ADD vaultKeepId INT UNSIGNED;
 
-DROP TABLE keeps;
+DROP TABLE vaultkeeps;
+
+
+SELECT 
+`vaultKeeps`.*,
+keeps.*,
+vaults.*,
+accounts.*
+FROM `vaultKeeps`
+JOIN keeps ON keeps.id = vaultKeeps.`keepId`
+JOIN vaults ON vaults.id = vaultKeeps.vaultId
+JOIN accounts ON accounts.id = keeps.`creatorId`
+WHERE `vaultKeeps`.id = 1;
+
+SELECT
+* FROM `vaultKeeps` WHERE id = 1;
+
+SELECT 
+        vaultKeeps.*,
+        accounts.*
+        FROM vaultKeeps
+        JOIN accounts ON accounts.id = vaultKeeps.creatorId
+        WHERE vaultKeeps.Id = 1
+        ;

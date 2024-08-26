@@ -5,7 +5,6 @@
 
 
 namespace keepr.Services;
-
 public class VaultsService
 {
   private readonly VaultsRepository _vaultsRepository;

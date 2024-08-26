@@ -41,7 +41,7 @@ async function getAllKeeps() {
 <style scoped lang="scss">
 @media screen and (min-width: 769px) {
   .masonry {
-    columns: 228px;
+    columns: 4;
     column-gap: 1em;
     column-fill: balance;
   }
@@ -55,7 +55,7 @@ async function getAllKeeps() {
 
 @media screen and (max-width: 768px) {
   .mobile-masonry {
-    columns: 150px;
+    columns: 2;
     column-gap: 1em;
     column-fill: balance;
     break-inside: avoid;

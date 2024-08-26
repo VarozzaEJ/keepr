@@ -1,15 +1,38 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { Vault } from '@/models/Vault.js';
+import { vaultKeepService } from '@/services/VaultKeepService.js';
+import Pop from '@/utils/Pop.js';
 import { computed } from 'vue';
 
 const props = defineProps({ vaultProp: { type: Vault, required: true } })
 const account = computed(() => AppState.account)
+const vaultKeeps = computed(() => AppState.vaultKeeps)
+
+
+async function getKeepsForPublicVault(vaultId) {
+    try {
+        vaultKeepService.getKeepsForPublicVault(vaultId)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
+async function setActiveVault(vaultId) {
+    try {
+        vaultsS
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
 </script>
 
 
 <template>
-    <main role="button" class="container-fluid vault-bg-img mb-3">
+    <main @click="setActiveVault(vaultProp) && getKeepsForPublicVault(vaultProp.id)" role="button"
+        class="container-fluid vault-bg-img mb-3">
         <div class="row">
             <div class="col-12 absolute d-flex justify-content-between">
                 <span class="fs-5 text-light text-shadow">{{ vaultProp.name }}</span>
