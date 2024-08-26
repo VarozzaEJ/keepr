@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/globals/KeepCard.vue';
+import VaultedKeepCard from '@/components/globals/VaultedKeepCard.vue';
 import { vaultKeepService } from '@/services/VaultKeepService.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import { computed, watch } from 'vue';
@@ -42,7 +43,7 @@ watch(() => route.params.vaultId, () => {
         <div class="row ">
             <div class="col-md-12 mobile-masonry  masonry">
                 <div class="break-inside" v-for="keep in vaultKeeps" :key="keep.id">
-                    <KeepCard :keepProp='keep' />
+                    <VaultedKeepCard :keepProp='keep' />
                 </div>
             </div>
         </div>

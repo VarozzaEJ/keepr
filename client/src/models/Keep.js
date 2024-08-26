@@ -11,6 +11,7 @@ export class Keep extends DatabaseItem {
         this.kept = data.kept
         this.creatorId = data.creatorId
         this.creator = new Profile(data.creator)
+        this.vaultKeepId = data.vaultKeepId
     }
 
     get keepBackgroundImage() {

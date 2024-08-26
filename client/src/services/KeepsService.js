@@ -34,6 +34,9 @@ class KeepsService {
         return keep
     }
 
+    async getKeepIndexById(keepId) {
+    }
+
 
 
 }

@@ -22,9 +22,13 @@ const editableVaultData = ref({
 
 async function createVaultKeep() {
     try {
-        debugger
         editableVaultData.value.keepId = keep.value.id
-        vaultKeepService.createVaultKeep(editableVaultData.value)
+        const response = await vaultKeepService.createVaultKeep(editableVaultData.value)
+        editableVaultData.value = {
+            vaultId: 0,
+            keepId: null
+        }
+        Pop.success("Success")
     }
     catch (error) {
         Pop.error(error);

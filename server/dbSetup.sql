@@ -42,12 +42,13 @@ CREATE TABLE vaultKeeps(
   creatorId VARCHAR(255) NOT NULL,
   FOREIGN KEY (keepId) REFERENCES keeps (id) ON DELETE CASCADE,
   FOREIGN KEY (vaultId) REFERENCES vaults (id) ON DELETE CASCADE,
-  FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+  FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE,
+  UNIQUE (keepId, vaultId)
 );
 ALTER TABLE keeps
 ADD vaultKeepId INT UNSIGNED;
 
-DROP TABLE vaultkeeps;
+DROP TABLE `vaultKeeps`;
 
 
 SELECT 

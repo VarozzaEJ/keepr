@@ -3,10 +3,18 @@ import { api } from "./AxiosService.js"
 import { VaultKeepKeep } from "@/models/VaultKeep.js"
 import { AppState } from "@/AppState.js"
 import { Keep } from "@/models/Keep.js"
+import { keepsService } from "./KeepsService.js"
 
 class VaultKeepService {
+    async deleteVaultKeep(vaultKeepId, keepId) {
+        const keepIndex = AppState.vaultKeeps.findIndex(keep => keep.id == keepId)
+        AppState.vaultKeeps.splice(keepIndex, 1)
+        const response = await api.delete(`api/vaultkeeps/${vaultKeepId}`)
+        logger.log(response.data)
+    }
     async createVaultKeep(vaultKeepData) {
-        await api.post('api/vaultkeeps', vaultKeepData)
+        const response = await api.post('api/vaultkeeps', vaultKeepData)
+        return response
     }
     async getKeepsForPublicVault(vaultId) {
 

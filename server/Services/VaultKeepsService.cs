@@ -25,7 +25,7 @@ public class VaultKeepsService
 
     internal string DeleteVaultKeep(int vaultKeepId, string userId)
     {
-      GetVaultKeepById(vaultKeepId, userId);
+      
       _vaultKeepsRepository.DeleteVaultKeep(vaultKeepId);
       string message = $"Keep was deleted from the vault";
       return message;
