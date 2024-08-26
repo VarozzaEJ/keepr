@@ -70,8 +70,8 @@ async function setActiveProfile(creatorId) {
                 </div>
                 <div class="col-5">
                     <div class="dropdown-center flex-grow-1 d-flex justify-content-end">
-                        <p class="mdi mdi-dots-horizontal fs-1" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <p v-if="account.id == profile.id" class="mdi mdi-dots-horizontal fs-1" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
 
                         </p>
                         <div class="dropdown-menu ">
@@ -158,26 +158,7 @@ async function setActiveProfile(creatorId) {
 
                 </div>
                 <div class="col-5">
-                    <div class="dropdown-center flex-grow-1 d-flex justify-content-end">
-                        <p class="mdi mdi-dots-horizontal fs-1" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
 
-                        </p>
-                        <div class="dropdown-menu ">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 d-flex justify-content-center">
-                                        <button class="btn w-75 d-flex justify-content-center mb-2 btn-danger"><i
-                                                class="mdi mdi-delete-forever">Delete</i></button>
-                                    </div>
-                                    <div class="col-12 d-flex justify-content-center">
-                                        <button class="btn w-75 text-center mb-1 btn-success"><i
-                                                class="mdi mdi-file"></i>Edit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-12 d-flex  justify-content-center">
                     <div class="row d-flex flex-column">
