@@ -13,6 +13,9 @@ export const AppState = reactive({
   /** @type {import('./models/Keep.js').Keep} user info from the database*/
   activeKeep: null,
 
+  /** @type {import('./models/Vault.js').Vault} user info from the database*/
+  activeVault: null,
+
   /** @type {import('./models/Vault.js').Vault[]} user info from the database*/
   profileVaults: [],
 

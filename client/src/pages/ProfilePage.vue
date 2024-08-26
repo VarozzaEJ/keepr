@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import KeepCard from '@/components/globals/KeepCard.vue';
 import VaultCard from '@/components/globals/VaultCard.vue';
 import { accountService } from '@/services/AccountService.js';
 import Pop from '@/utils/Pop.js';
@@ -66,11 +67,11 @@ async function setActiveProfile(creatorId) {
             </div>
 
             <div class="row d-flex justify-content-end">
-                <div class="col-2 d-flex justify-content-center">
+                <div class="col-md-2 col-5 d-flex justify-content-center">
                     <img class="img-fluid creator-picture" :src="profile.picture" :alt="`A picture of ${profile.name}`">
 
                 </div>
-                <div class="col-5">
+                <div class="col-md-5 col-3">
                     <div class="dropdown-center flex-grow-1 d-flex justify-content-end">
                         <p v-if="account.id == profile.id" class="mdi mdi-dots-horizontal fs-1" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -142,6 +143,13 @@ async function setActiveProfile(creatorId) {
                 <div class="row">
                     <span class="fw-bold fs-2">Keeps</span>
                 </div>
+                <div class="row mt-3 full-vh">
+                    <div class="col-md-12 mobile-masonry  masonry">
+                        <div class="break-inside" v-for="keep in keeps" :key="keep.id">
+                            <KeepCard :keepProp='keep' />
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -208,6 +216,13 @@ async function setActiveProfile(creatorId) {
                 <div class="row">
                     <span class="fw-bold fs-2">Keeps</span>
                 </div>
+                <div class="row mt-3 full-vh">
+                    <div class="col-md-12 mobile-masonry  masonry">
+                        <div class="break-inside" v-for="keep in keeps" :key="keep.id">
+                            <KeepCard :keepProp='keep' />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div v-else><span class="fs-1">Loading ... <i class="mdi mdi-loading mdi-spin"></i></span></div>
@@ -229,5 +244,28 @@ async function setActiveProfile(creatorId) {
     width: 75px;
     position: relative;
     top: -30px;
+}
+
+@media screen and (min-width: 769px) {
+    .masonry {
+        columns: 4;
+        column-gap: 1em;
+        column-fill: balance;
+    }
+}
+
+.full-vh {}
+
+.break-inside {
+    break-inside: avoid;
+}
+
+@media screen and (max-width: 768px) {
+    .mobile-masonry {
+        columns: 2;
+        column-gap: 1em;
+        column-fill: balance;
+        break-inside: avoid;
+    }
 }
 </style>

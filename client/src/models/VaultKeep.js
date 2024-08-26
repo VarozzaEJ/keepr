@@ -9,7 +9,6 @@ export class VaultKeep extends DatabaseItem {
         this.vaultId = data.vaultId
         this.creatorId = data.creatorId
         this.creator = new Profile(data.creator)
-
     }
 }
 

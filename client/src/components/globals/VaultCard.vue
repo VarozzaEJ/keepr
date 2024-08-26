@@ -2,26 +2,28 @@
 import { AppState } from '@/AppState.js';
 import { Vault } from '@/models/Vault.js';
 import { vaultKeepService } from '@/services/VaultKeepService.js';
+import { vaultsService } from '@/services/VaultsService.js';
 import Pop from '@/utils/Pop.js';
 import { computed } from 'vue';
+import VaultModal from './VaultModal.vue';
 
 const props = defineProps({ vaultProp: { type: Vault, required: true } })
 const account = computed(() => AppState.account)
 const vaultKeeps = computed(() => AppState.vaultKeeps)
 
 
-async function getKeepsForPublicVault(vaultId) {
-    try {
-        vaultKeepService.getKeepsForPublicVault(vaultId)
-    }
-    catch (error) {
-        Pop.error(error);
-    }
-}
+// async function getKeepsForPublicVault(vaultId) {
+//     try {
+//         vaultKeepService.getKeepsForPublicVault(vaultId)
+//     }
+//     catch (error) {
+//         Pop.error(error);
+//     }
+// }
 
 async function setActiveVault(vaultId) {
     try {
-        vaultsS
+        vaultsService.setActiveVault(vaultId)
     }
     catch (error) {
         Pop.error(error);
@@ -31,15 +33,19 @@ async function setActiveVault(vaultId) {
 
 
 <template>
-    <main @click="setActiveVault(vaultProp) && getKeepsForPublicVault(vaultProp.id)" role="button"
-        class="container-fluid vault-bg-img mb-3">
-        <div class="row">
-            <div class="col-12 absolute d-flex justify-content-between">
-                <span class="fs-5 text-light text-shadow">{{ vaultProp.name }}</span>
-                <span v-if="vaultProp.isPrivate" class="fs-5 text-light text-shadow"><i class="mdi mdi-lock"></i></span>
+    <RouterLink :to="{ name: 'Vault Details', params: { vaultId: vaultProp.id } }">
+
+        <main @click="setActiveVault(vaultProp.id)" role="button" class="container-fluid vault-bg-img mb-3">
+            <div class="row">
+                <div class="col-12 absolute d-flex justify-content-between">
+                    <span class="fs-5 text-light text-shadow">{{ vaultProp.name }}</span>
+                    <span v-if="vaultProp.isPrivate" class="fs-5 text-light text-shadow"><i
+                            class="mdi mdi-lock"></i></span>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </RouterLink>
+
 </template>
 
 

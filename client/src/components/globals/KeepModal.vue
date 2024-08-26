@@ -1,22 +1,43 @@
 <script setup>
 import { AppState } from '@/AppState.js';
-import { computed } from 'vue';
+import { accountService } from '@/services/AccountService.js';
+import { vaultKeepService } from '@/services/VaultKeepService.js';
+import Pop from '@/utils/Pop.js';
+import { computed, onMounted, ref, watch } from 'vue';
 
 
 const keep = computed(() => AppState.activeKeep)
+const profileVaults = computed(() => AppState.profileVaults)
+const account = computed(() => AppState.account)
 
+watch(() => AppState.account, () => {
+    accountService.getVaultsByCreatorId(AppState.account.id)
+})
+
+
+const editableVaultData = ref({
+    vaultId: 0,
+    keepId: null
+})
+
+async function createVaultKeep() {
+    try {
+        debugger
+        editableVaultData.value.keepId = keep.value.id
+        vaultKeepService.createVaultKeep(editableVaultData.value)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
 </script>
 
 
 <template>
-    <div class="modal modal-lg fade" id="keepModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal modal-xl fade" id="keepModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" v-if="keep">
-                <!-- <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> -->
                 <div class="modal-body p-0">
                     <div class="container-fluid">
                         <div class="row">
@@ -39,17 +60,27 @@ const keep = computed(() => AppState.activeKeep)
                                             <span class="fs-6 text-center">{{ keep.description }}</span>
                                         </div>
                                     </div>
-                                    <div class="row d-flex justify-content-md-around justify-content-between">
-                                        <div class="col-4 mb-4 d-flex align-items-center justify-content-between">
-                                            <span class="fs-5 d-flex border-bottom me-1 selectable">Plants <i
-                                                    class="mdi mdi-menu-down"></i></span>
-                                            <button class="btn btn-success rounded text-light">save</button>
+                                    <div
+                                        class="row d-flex justify-content-md-around justify-content-md-between justify-content-around">
+                                        <div
+                                            class="col-lg-7 col-12 mb-4 d-flex ps-0 align-items-center justify-content-center">
+                                            <form @submit.prevent="createVaultKeep()" v-if="account" class="d-flex">
+                                                <select v-model="editableVaultData.vaultId"
+                                                    class="form-select form-control no-round-end pe-0"
+                                                    aria-label="Select a vault to add the picture to">
+                                                    <option selected value=0>Select a Vault</option>
+                                                    <option v-for="vault in profileVaults" :key="vault.id"
+                                                        :value="vault.id">{{ vault.name }}</option>
+                                                </select>
+                                                <button
+                                                    class="btn btn-success rounded text-light text-center no-round-start">save</button>
+                                            </form>
                                         </div>
                                         <div
-                                            class="col-md-6 col-4 mb-4 me-md-0 me-2 ps-md-5 ps-0 d-flex align-items-center">
+                                            class="col-lg-5 col-12 mb-4 me-md-0 me-2 ps-md-2 ps-0 d-flex align-items-center">
                                             <img class="img-fluid creator-picture " :src="keep.creator.picture"
                                                 :alt="keep.creator.name">
-                                            <span class=" ms-2 fs-5">{{ keep.creator.name
+                                            <span class=" ms-2 fs-5 me-2">{{ keep.creator.trimmedName
                                                 }}</span>
                                         </div>
                                     </div>
@@ -93,5 +124,19 @@ const keep = computed(() => AppState.activeKeep)
         height: 450px;
         width: 100%;
     }
+}
+
+.no-round-end {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.no-round-start {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+form {
+    width: 50dvw;
 }
 </style>
