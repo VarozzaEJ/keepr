@@ -3,24 +3,38 @@ import { AppState } from '@/AppState.js';
 import VaultCard from '@/components/globals/VaultCard.vue';
 import { accountService } from '@/services/AccountService.js';
 import Pop from '@/utils/Pop.js';
-import { computed, onMounted, watch } from 'vue';
+import { computed, onMounted, watch, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 
 const profile = computed(() => AppState.activeProfile)
 const route = useRoute()
+const publicVaults = computed(() => AppState.publicProfileVaults)
 const vaults = computed(() => AppState.profileVaults)
 const keeps = computed(() => AppState.profileKeeps)
+const account = computed(() => AppState.account)
 
 
 watch(() => route.params.profileId, () => {
     getVaultsByCreatorId(route.params.profileId)
     setActiveProfile(route.params.profileId)
+    getKeepsByProfileId(route.params.profileId)
 }, { immediate: true })
+
+
 
 
 async function getVaultsByCreatorId(profileId) {
     try {
         accountService.getVaultsByCreatorId(profileId)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
+async function getKeepsByProfileId(accountId) {
+    try {
+        accountService.getKeepsByCreatorId(accountId)
     }
     catch (error) {
         Pop.error(error);
@@ -81,10 +95,23 @@ async function setActiveProfile(creatorId) {
                         <div class="d-flex justify-content-center">
                             <span class="fw-bold fs-2">{{ profile.name }}</span>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <span class="me-2">{{ vaults.length }} Vaults</span>
+                        <div v-if="account.id == profile.id" class="d-flex justify-content-center">
+                            <span v-if="vaults.length > 1 || vaults.length == 0" class="me-2">{{ vaults.length }}
+                                Vaults</span>
+                            <span v-else-if="vaults.length == 1" class="me-2">{{ vaults.length }} Vault</span>
                             <span>|</span>
-                            <span class="ms-2"> 14 Keeps</span>
+                            <span v-if="keeps.length > 1" class="ms-2"> {{ keeps.length }} Keeps</span>
+                            <span v-else class="ms-2"> {{ keeps.length }} Keep</span>
+                        </div>
+                        <div v-else-if="account.id != profile.id" class="d-flex justify-content-center text-danger">
+                            <span v-if="publicVaults.length > 1 || publicVaults.length == 0" class="me-2">{{
+                                publicVaults.length }} Vaults</span>
+                            <span v-else-if="publicVaults.length == 1" class="me-2">{{ publicVaults.length }}
+                                Vault</span>
+                            <span>|</span>
+                            <span v-if="keeps.length > 1 || keeps.length == 0" class="ms-2"> {{ keeps.length }}
+                                Keeps</span>
+                            <span v-else class="ms-2"> {{ keeps.length }} Keep</span>
                         </div>
                     </div>
                 </div>
@@ -95,9 +122,12 @@ async function setActiveProfile(creatorId) {
                 </div>
             </div>
             <div class="row">
-                <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
-                    <!-- Vault cards go here -->
-                    <VaultCard :vaultProp="vault" />
+
+                <div>
+                    <div v-for="vault in publicVaults" :key="vault.id" class="col-md-3">
+                        <!-- Vault cards go here -->
+                        <VaultCard :vaultProp="vault" />
+                    </div>
                 </div>
             </div>
 

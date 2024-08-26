@@ -19,14 +19,15 @@ const routes = [
   {
     path: '/:profileId',
     name: 'Profile',
-    component: loadPage('ProfilePage')
+    component: loadPage('ProfilePage'),
+    beforeEnter: authSettled
   },
-  {
-    path: '/account',
-    name: 'Account',
-    component: loadPage('AccountPage'),
-    beforeEnter: authSettled,
-  }
+  // {
+  //   path: '/account',
+  //   name: 'Account',
+  //   component: loadPage('AccountPage'),
+  //   beforeEnter: authSettled,
+  // }
 ]
 
 export const router = createRouter({

@@ -10,6 +10,7 @@ import { router } from '@/router.js';
 const account = computed(() => AppState.account)
 const vaults = computed(() => AppState.profileVaults)
 const route = useRoute()
+const keeps = computed(() => AppState.profileKeeps)
 
 watch(() => AppState.account, () => {
   getVaultsByCreatorId(account.value.id)
@@ -86,7 +87,7 @@ async function getKeepsByProfileId(accountId) {
             <div class="d-flex justify-content-center">
               <span class="me-2">{{ vaults.length }} Vaults</span>
               <span>|</span>
-              <span class="ms-2"> 14 Keeps</span>
+              <span class="ms-2"> {{ keeps.length }} Keeps</span>
             </div>
           </div>
         </div>

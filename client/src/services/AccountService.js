@@ -4,18 +4,28 @@ import { Account } from '../models/Account.js'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 import { Vault } from '@/models/Vault.js'
+import { Keep } from '@/models/Keep.js'
 
 class AccountService {
   async getVaultsByCreatorId(profileId) {
+    AppState.publicProfileVaults = []
     AppState.profileVaults = []
     const response = await api.get(`account/${profileId}/vaults`)
-    const profileVaults = response.data.map(vaultPOJO => new Vault(vaultPOJO))
-    AppState.profileVaults = profileVaults
+    const publicProfileVaults = response.data
+      .filter(vault => vault.isPrivate == false)
+      .map(vaultPOJO => new Vault(vaultPOJO))
+    AppState.publicProfileVaults = publicProfileVaults
+
+    const privateProfileVaults = response.data.map(vaultPOJO => new Vault(vaultPOJO))
+    AppState.profileVaults = privateProfileVaults
+
   }
 
   async getKeepsByCreatorId(profileId) {
+    AppState.profileKeeps = []
     const response = await api.get(`account/${profileId}/keeps`)
-    logger.log(response.data)
+    const keeps = response.data.map(keepPOJO => new Keep(keepPOJO))
+    AppState.profileKeeps = keeps
   }
   async setActiveProfile(creatorId) {
     AppState.activeProfile = null
