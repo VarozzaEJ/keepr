@@ -47,6 +47,19 @@ async function updateAccount() {
                                     required maxlength="100">
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">Image Preview</label>
+                                <div class="d-flex justify-content-center">
+                                    <div v-if="!editableAccountData.picture"
+                                        class="bg-subtle rounded img-preview d-flex justify-content-center align-items-center">
+                                        <i class="mdi mdi-image display-1"></i>
+                                    </div>
+                                    <div v-else>
+                                        <img class="rounded img-preview preview-img" :src="editableAccountData.picture"
+                                            :alt="`${editableAccountData.picture}`">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="picture" class="form-label">Account Picture</label>
                                 <input v-model="editableAccountData.picture" type="url" class="form-control"
                                     id="picture" required maxlength="500">
@@ -67,4 +80,16 @@ async function updateAccount() {
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.preview-img {
+    width: 300px;
+    height: 300px;
+}
+
+.img-preview {
+    height: 25vh;
+    width: 25vh;
+    border: 2px dashed black;
+    color: black;
+}
+</style>

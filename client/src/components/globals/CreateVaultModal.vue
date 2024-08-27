@@ -50,6 +50,19 @@ async function createVault() {
                                     id="title" maxlength="50">
                                 <label for="title">Title</label>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label">Image Preview</label>
+                                <div class="d-flex justify-content-center">
+                                    <div v-if="!editableVaultData.img"
+                                        class="bg-subtle rounded img-preview d-flex justify-content-center align-items-center">
+                                        <i class="mdi mdi-image display-1"></i>
+                                    </div>
+                                    <div v-else>
+                                        <img class="rounded img-preview preview-img" :src="editableVaultData.img"
+                                            :alt="`${editableVaultData.img}`">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="mb-3 form-floating">
                                 <input minlength="2" v-model="editableVaultData.img" type="url" class="form-control"
                                     id="Img" maxlength="3000">
@@ -74,6 +87,18 @@ async function createVault() {
 
 
 <style lang="scss" scoped>
+.preview-img {
+    width: 300px;
+    height: 300px;
+}
+
+.img-preview {
+    height: 25vh;
+    width: 25vh;
+    border: 2px dashed black;
+    color: black;
+}
+
 main {
     outline: none;
 }

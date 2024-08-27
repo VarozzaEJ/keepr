@@ -165,11 +165,12 @@ async function setActiveProfile(creatorId) {
             </div>
 
             <div class="row d-flex justify-content-end">
-                <div class="col-2 d-flex justify-content-center">
-                    <img class="img-fluid creator-picture" :src="profile.picture" :alt="`A picture of ${profile.name}`">
+                <div class="col-md-2 col-3 d-flex justify-content-center">
+                    <img class="img-fluid creator-picture me-md-0 me-3" :src="profile.picture"
+                        :alt="`A picture of ${profile.name}`">
 
                 </div>
-                <div class="col-5">
+                <div class="col-md-5 col-4">
 
                 </div>
                 <div class="col-12 d-flex  justify-content-center">

@@ -49,17 +49,22 @@ async function createVaultKeep() {
                 <div class="modal-body p-0">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6 p-0">
+                            <div class="col-md-6  p-0">
                                 <img class="img img-fluid mobile-height" :src="keep.img" alt="">
                             </div>
                             <div class="col-md-6 d-flex mobile-height">
+
                                 <div class="container d-flex flex-column justify-content-between">
+
                                     <div class="row d-flex justify-content-center">
+
                                         <div class="col-4 mt-4 d-flex justify-content-between">
-                                            <span class="fs-4"><i class="mdi mdi-eye me-2"></i>{{ keep.views }}</span>
+                                            <span class="fs-4"><i class="mdi mdi-eye me-2"></i>{{ keep.views
+                                                }}</span>
                                             <span class="fs-4"><i class="mdi mdi-alpha-k-box-outline me-2"></i>{{
                                                 keep.keptCount }}</span>
                                         </div>
+
                                     </div>
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-lg-8 col-12 d-flex justify-content-center">
@@ -82,7 +87,7 @@ async function createVaultKeep() {
                                                         :value="vault.id">{{ vault.name }}</option>
                                                 </select>
                                                 <button
-                                                    class="btn btn-success rounded text-light text-center no-round-start">save</button>
+                                                    class="btn btn-success text-light text-center no-round-start">save</button>
                                             </form>
                                         </div>
                                         <div
@@ -140,13 +145,13 @@ async function createVaultKeep() {
 }
 
 .no-round-end {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
 }
 
 .no-round-start {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-top-left-radius: 0%;
+    border-bottom-left-radius: 0%;
 }
 
 form {

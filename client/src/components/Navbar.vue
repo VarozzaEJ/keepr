@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
 import { AppState } from '@/AppState.js';
+import { useRoute } from 'vue-router';
 
 const theme = ref(loadState('theme') || 'light')
 const account = computed(() => AppState.account)
@@ -10,6 +11,8 @@ const account = computed(() => AppState.account)
 onMounted(() => {
   document.documentElement.setAttribute('data-bs-theme', theme.value)
 })
+
+const route = useRoute()
 
 function toggleTheme() {
   theme.value = theme.value == 'light' ? 'dark' : 'light'
@@ -24,7 +27,7 @@ function toggleTheme() {
   <nav class="navbar navbar-expand shadow sticky-top navbar-dark bg-light px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <p class="fs-4 mb-0 bg-info rounded-pill px-3 text-dark">Home</p>
+        <p title="Go Home?" class="fs-4 mb-0 bg-info rounded-pill px-3 text-dark">Home</p>
       </div>
     </router-link>
     <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -34,8 +37,8 @@ function toggleTheme() {
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <div v-if="account" class="dropdown">
-          <div data-bs-toggle="dropdown" class="btn dropdown-toggle text-dark lighten-30">
-            <span class="fs-4 ">Create</span>
+          <div v-if="route.name == 'Home'" data-bs-toggle="dropdown" class="btn dropdown-toggle text-dark lighten-30">
+            <span title="Create a New Vault or New Keep" class="fs-4 ">Create</span>
           </div>
           <ul class="dropdown-menu">
             <div class="mx-4 mb-2">
@@ -51,8 +54,8 @@ function toggleTheme() {
 
       </ul>
       <div class="me-md-5 me-2">
-        <img src="/Users/evanvarozza/source/codeworks/keepr/client/public/img/Keepr logo.png" height="64px" width="64px"
-          alt="">
+        <img title="Our Logo" src="/Users/evanvarozza/source/codeworks/keepr/client/public/img/Keepr logo.png"
+          height="64px" width="64px" alt="">
       </div>
       <!-- LOGIN COMPONENT HERE -->
       <!-- <div>

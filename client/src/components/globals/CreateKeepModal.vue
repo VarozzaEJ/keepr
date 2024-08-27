@@ -48,6 +48,19 @@ async function createKeep() {
                                 placeholder="Title">
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">Image Preview</label>
+                            <div class="d-flex justify-content-center">
+                                <div v-if="!editableKeepData.img"
+                                    class="bg-subtle rounded img-preview d-flex justify-content-center align-items-center">
+                                    <i class="mdi mdi-image display-1"></i>
+                                </div>
+                                <div v-else>
+                                    <img class="rounded img-preview preview-img" :src="editableKeepData.img"
+                                        :alt="`${editableKeepData.img}`">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <input required v-model="editableKeepData.img" type="url" class="form-control"
                                 placeholder="Image URL">
                         </div>
@@ -67,6 +80,18 @@ async function createKeep() {
 
 
 <style lang="scss" scoped>
+.preview-img {
+    width: 300px;
+    height: 300px;
+}
+
+.img-preview {
+    height: 25vh;
+    width: 25vh;
+    border: 2px dashed black;
+    color: black;
+}
+
 .no-round {
     border-radius: 1%;
 }

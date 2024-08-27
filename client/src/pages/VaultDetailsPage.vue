@@ -12,6 +12,7 @@ import { useRoute } from 'vue-router';
 const vault = computed(() => AppState.activeVault)
 const vaultKeeps = computed(() => AppState.vaultKeeps)
 const route = useRoute()
+const account = computed(() => AppState.account)
 
 watch(() => route.params.vaultId, () => {
     getVaultById(route.params.vaultId)
@@ -30,13 +31,29 @@ async function getVaultById(vaultId) {
         }
     }
 }
+
+async function deleteVault() {
+    try {
+        const wantsToDelete = await Pop.confirm("Are you sure?")
+        if (!wantsToDelete) return
+        vaultsService.deleteVault(route.params.vaultId)
+        router.push({ name: 'Home' })
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
 </script>
 
 
 <template>
-    <div v-if="vault" class="container">
+    <div v-if="vault" class="container mt-2">
         <div class="row d-flex justify-content-center">
             <div class="col-md-8 col-11  ">
+                <div v-if="vault.creatorId == account?.id" class="d-flex justify-content-end">
+                    <i @click="deleteVault()" role="button" title="Delete Vault?"
+                        class="mdi mdi-close-circle text-danger text-end fs-1"></i>
+                </div>
                 <img :src="vault.img" alt="" class="img-fluid vault-bg-img">
                 <div class="d-flex justify-content-center relative">
                     <div class="d-block text-light text-shadow">
@@ -46,12 +63,13 @@ async function getVaultById(vaultId) {
                 </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-center my-3">
-            <div class="col-md-2 col-4">
-                <div class="bg-info rounded-pill p-1">
+        <div class="row d-flex justify-content-center mb-3">
+            <div class="col-md-3 col-4">
+                <div class="bg-info rounded-pill p-2">
                     <p v-if="vaultKeeps.length > 1 || vaultKeeps.length == 0" class="fs-3 text-center mb-0">{{
                         vaultKeeps.length }} Keeps</p>
-                    <p v-if="vaultKeeps.length == 1" class="fs-3 text-center mb-0">{{ vaultKeeps.length }} Keep</p>
+                    <p v-if="vaultKeeps.length == 1" class="fs-3 text-center mb-0">{{ vaultKeeps.length }} Keep
+                    </p>
                 </div>
             </div>
         </div>
@@ -76,7 +94,6 @@ async function getVaultById(vaultId) {
 <style lang="scss" scoped>
 .vault-bg-img {
     // background-image: v-bind('vault.vaultBackgroundImage');
-    height: 100%;
     border-radius: 2%;
     background-position: center;
     object-fit: contain;
@@ -103,6 +120,12 @@ async function getVaultById(vaultId) {
         column-gap: 1em;
         column-fill: balance;
     }
+
+    i {
+        position: relative;
+        top: 30px;
+        left: 20px;
+    }
 }
 
 
@@ -116,6 +139,12 @@ async function getVaultById(vaultId) {
         column-gap: 1em;
         column-fill: balance;
         break-inside: avoid;
+    }
+
+    i {
+        position: relative;
+        top: 20px;
+        left: 10px;
     }
 }
 </style>

@@ -3,6 +3,9 @@ import { api } from "./AxiosService.js";
 import { AppState } from "@/AppState.js";
 
 class VaultsService {
+    async deleteVault(vaultId) {
+        const response = await api.delete(`api/vaults/${vaultId}`)
+    }
     async createVault(vaultData) {
         const response = await api.post('api/vaults', vaultData)
         const newVault = new Vault(response.data)

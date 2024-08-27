@@ -49,7 +49,8 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
 <template>
     <main class="container-fluid my-md-1 my-2 keep-bg-img dynamic-width text-dark">
         <div class="d-flex justify-content-end"><i @click="deleteVaultKeep(keepProp.vaultKeepId, keepProp.id)"
-                v-if="account?.id == activeProfile.id" role="button" class="mdi mdi-close-circle text-danger"></i>
+                v-if="account?.id == activeProfile?.id" role="button" class="mdi mdi-close-circle text-danger"
+                title="Remove vault from keep"></i>
         </div>
         <div class="row ">
             <div class="col-12">
@@ -61,7 +62,8 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
                 <span class=" ms-2 text-light text-shadow">{{ keepProp.name }}</span>
                 <router-link :to="{ name: 'Profile', params: { profileId: keepProp.creatorId } }">
                     <img @click="setActiveProfile(keepProp.creatorId)" role='button' class="creator-picture me-1"
-                        :src="keepProp.creator.picture" :alt="keepProp.creator.name">
+                        :src="keepProp.creator.picture" :alt="keepProp.creator.name"
+                        :title="`Navigate to ${keepProp.creator.name}'s page`">
                 </router-link>
             </div>
         </div>
