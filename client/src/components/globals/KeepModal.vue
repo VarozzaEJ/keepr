@@ -57,8 +57,8 @@ async function createVaultKeep() {
                                         </div>
                                     </div>
                                     <div class="row d-flex justify-content-center">
-                                        <div class="col-md-8 d-flex justify-content-center">
-                                            <span class="fw-bold fs-2">{{ keep.name }}</span>
+                                        <div class="col-lg-8 col-12 d-flex justify-content-center">
+                                            <span class="fw-bold fs-2 text-center">{{ keep.name }}</span>
                                         </div>
                                         <div class="col-12 d-flex justify-content-center">
                                             <span class="fs-6 text-center">{{ keep.description }}</span>
@@ -81,7 +81,7 @@ async function createVaultKeep() {
                                             </form>
                                         </div>
                                         <div
-                                            class="col-lg-5 col-12 mb-4 me-md-0 me-2 ps-md-2 ps-0 d-flex align-items-center">
+                                            class="col-lg-5 col-12 mb-4 me-md-0 me-2 ps-md-2 justify-content-center ps-0 d-flex align-items-center">
                                             <img class="img-fluid creator-picture " :src="keep.creator.picture"
                                                 :alt="keep.creator.name">
                                             <span class=" ms-2 fs-5 me-2">{{ keep.creator.trimmedName

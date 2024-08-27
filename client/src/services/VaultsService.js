@@ -3,6 +3,16 @@ import { api } from "./AxiosService.js";
 import { AppState } from "@/AppState.js";
 
 class VaultsService {
+    async createVault(vaultData) {
+        const response = await api.post('api/vaults', vaultData)
+        const newVault = new Vault(response.data)
+        if (newVault.isPrivate == false) {
+            AppState.profileVaults.push(newVault)
+        } else if (newVault.isPrivate == true) {
+            AppState.publicProfileVaults.push(newVault)
+        }
+        return newVault
+    }
     async setActiveVault(vaultId) {
         AppState.activeVault = null
         const vault = await this.getVaultById(vaultId)

@@ -3,11 +3,14 @@ import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
 import KeepModal from './components/globals/KeepModal.vue';
 import CreateKeepModal from './components/globals/CreateKeepModal.vue';
+import { computed } from 'vue';
+import CreateVaultModal from './components/globals/CreateVaultModal.vue';
 
+const screenHeight = computed(() => screenX) //maybe whats needed for moving the nav to the bottom of the screen on mobile
 </script>
 
 <template>
-  <header>
+  <header class="sticky-top">
     <Navbar />
   </header>
   <main>
@@ -15,6 +18,7 @@ import CreateKeepModal from './components/globals/CreateKeepModal.vue';
   </main>
   <KeepModal />
   <CreateKeepModal />
+  <CreateVaultModal />
 </template>
 
 <style lang="scss">

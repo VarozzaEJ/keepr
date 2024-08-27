@@ -31,10 +31,8 @@ async function createKeep() {
 
 
 <template>
-    <!-- Button trigger modal -->
 
 
-    <!-- Modal -->
     <div class="modal  fade" id="createKeepModal" tabindex="-1" aria-labelledby="createKeepModalLabel"
         aria-hidden="true">
         <div class="modal-dialog ">

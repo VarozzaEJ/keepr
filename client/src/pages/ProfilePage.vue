@@ -57,7 +57,7 @@ async function setActiveProfile(creatorId) {
 
 
 <template>
-    <div class="container w-75">
+    <div class="container w-md-75">
         <div v-if="profile && account" class="row">
             <div class="col-12">
                 <div class=" h-50">
@@ -83,8 +83,8 @@ async function setActiveProfile(creatorId) {
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center">
                                         <button data-bs-toggle="modal" data-bs-target="#editAccountModal"
-                                            class="btn w-75 text-center mb-1 btn-success"><i
-                                                class="mdi mdi-file"></i>Edit Account</button>
+                                            class="btn  text-center mb-1 btn-success"><i class="mdi mdi-file"></i>Edit
+                                            Account</button>
                                     </div>
                                 </div>
                             </div>
@@ -123,15 +123,15 @@ async function setActiveProfile(creatorId) {
                 </div>
             </div>
             <div>
-
-                <div v-if="account.id != profile.id || !account" class="row">
-                    <div v-for="vault in publicVaults" :key="vault.id" class="col-md-3">
-                        <!-- Vault cards go here -->
+                <div v-if="account.id == profile.id" class="row">
+                    <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
                         <VaultCard :vaultProp="vault" />
                     </div>
                 </div>
-                <div v-else-if="account.id == profile.id" class="row">
-                    <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
+
+                <div v-else-if="account.id != profile.id" class="row">
+                    <div v-for="vault in publicVaults" :key="vault.id" class="col-md-3">
+                        <!-- Vault cards go here -->
                         <VaultCard :vaultProp="vault" />
                     </div>
                 </div>

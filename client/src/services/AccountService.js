@@ -14,7 +14,7 @@ class AccountService {
   async getVaultsByCreatorId(profileId) {
     AppState.publicProfileVaults = []
     AppState.profileVaults = []
-    const response = await api.get(`account/${profileId}/vaults`)
+    const response = await api.get(`api/profiles/${profileId}/vaults`)
     const publicProfileVaults = response.data
       .filter(vault => vault.isPrivate == false)
       .map(vaultPOJO => new Vault(vaultPOJO))
@@ -27,13 +27,13 @@ class AccountService {
 
   async getKeepsByCreatorId(profileId) {
     AppState.profileKeeps = []
-    const response = await api.get(`account/${profileId}/keeps`)
+    const response = await api.get(`api/profiles/${profileId}/keeps`)
     const keeps = response.data.map(keepPOJO => new Keep(keepPOJO))
     AppState.profileKeeps = keeps
   }
   async setActiveProfile(creatorId) {
     AppState.activeProfile = null
-    const response = await api.get(`account/${creatorId}`)
+    const response = await api.get(`api/profiles/${creatorId}`)
     const profile = new Profile(response.data)
     AppState.activeProfile = profile
   }

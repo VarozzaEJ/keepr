@@ -20,7 +20,7 @@ function toggleTheme() {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm shadow navbar-dark bg-light px-3">
+  <nav class="navbar navbar-expand-sm shadow sticky-top navbar-dark bg-light px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <p class="fs-4 mb-0 bg-info rounded-pill px-3 text-dark">Home</p>
@@ -40,7 +40,8 @@ function toggleTheme() {
             <ul class="dropdown-menu">
               <li><span data-bs-toggle="modal" data-bs-target="#createKeepModal" class="dropdown-item">New Keep</span>
               </li>
-              <li><span class="dropdown-item">New Vault</span></li>
+              <li><span data-bs-toggle="modal" data-bs-target="#createVaultModal" class="dropdown-item">New Vault</span>
+              </li>
             </ul>
           </div>
         </li>
