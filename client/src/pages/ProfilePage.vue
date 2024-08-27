@@ -108,7 +108,7 @@ async function setActiveProfile(creatorId) {
                             <span v-if="keeps.length > 1" class="ms-2"> {{ keeps.length }} Keeps</span>
                             <span v-else class="ms-2"> {{ keeps.length }} Keep</span>
                         </div>
-                        <div v-else-if="account.id != profile.id" class="d-flex justify-content-center text-danger">
+                        <div v-else-if="account.id != profile.id" class="d-flex justify-content-center">
                             <span v-if="publicVaults.length > 1 || publicVaults.length == 0" class="me-2">{{
                                 publicVaults.length }} Vaults</span>
                             <span v-else-if="publicVaults.length == 1" class="me-2">{{ publicVaults.length }}
@@ -185,7 +185,7 @@ async function setActiveProfile(creatorId) {
                             <span v-if="keeps.length > 1" class="ms-2"> {{ keeps.length }} Keeps</span>
                             <span v-else class="ms-2"> {{ keeps.length }} Keep</span>
                         </div> -->
-                        <div class="d-flex justify-content-center text-danger">
+                        <div class="d-flex justify-content-center">
                             <span v-if="publicVaults.length > 1 || publicVaults.length == 0" class="me-2">{{
                                 publicVaults.length }} Vaults</span>
                             <span v-else-if="publicVaults.length == 1" class="me-2">{{ publicVaults.length }}

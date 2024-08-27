@@ -20,6 +20,7 @@ function toggleTheme() {
 </script>
 
 <template>
+
   <nav class="navbar navbar-expand shadow sticky-top navbar-dark bg-light px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
@@ -49,7 +50,7 @@ function toggleTheme() {
         </div>
 
       </ul>
-      <div class="me-5">
+      <div class="me-md-5 me-2">
         <img src="/Users/evanvarozza/source/codeworks/keepr/client/public/img/Keepr logo.png" height="64px" width="64px"
           alt="">
       </div>
@@ -63,6 +64,7 @@ function toggleTheme() {
       <Login />
     </div>
   </nav>
+
 </template>
 
 <style scoped>
