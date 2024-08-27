@@ -28,6 +28,11 @@ public class VaultsService
       return $"{vault.Name} was deleted successfully";
     }
 
+    internal List<Vault> GetMyAccountVaults(string userId)
+    {
+      List<Vault> vaults = _vaultsRepository.GetMyAccountVaults(userId);
+      return vaults;
+    }
 
     internal Vault GetVaultById(int vaultId, string userId)
     {
@@ -38,12 +43,15 @@ public class VaultsService
       throw new Exception($"No vault found with the id of {vaultId} ");
     }
 
+
+
     return vault;
     }
 
-    internal List<Vault> GetVaultsByCreatorId(string creatorId)
+    internal List<Vault> GetVaultsForOtherProfiles(string creatorId)
     {
-      List<Vault> vaults = _vaultsRepository.GetVaultsForAccount(creatorId);
+
+      List<Vault> vaults = _vaultsRepository.GetVaultsForOtherProfiles(creatorId);
       return vaults;
     }
 

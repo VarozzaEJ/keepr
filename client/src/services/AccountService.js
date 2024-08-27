@@ -7,6 +7,10 @@ import { Vault } from '@/models/Vault.js'
 import { Keep } from '@/models/Keep.js'
 
 class AccountService {
+  async updateAccount(accountData) {
+    const response = await api.put('/account/update', accountData)
+    AppState.activeProfile = new Profile(response.data)
+  }
   async getVaultsByCreatorId(profileId) {
     AppState.publicProfileVaults = []
     AppState.profileVaults = []

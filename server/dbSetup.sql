@@ -42,8 +42,7 @@ CREATE TABLE vaultKeeps(
   creatorId VARCHAR(255) NOT NULL,
   FOREIGN KEY (keepId) REFERENCES keeps (id) ON DELETE CASCADE,
   FOREIGN KEY (vaultId) REFERENCES vaults (id) ON DELETE CASCADE,
-  FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE,
-  UNIQUE (keepId, vaultId)
+  FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 );
 ALTER TABLE keeps
 ADD vaultKeepId INT UNSIGNED;
@@ -72,3 +71,10 @@ SELECT
         JOIN accounts ON accounts.id = vaultKeeps.creatorId
         WHERE vaultKeeps.Id = 1
         ;
+
+        SELECT
+        vaults.*,
+        accounts.*
+        FROM vaults
+        JOIN accounts ON accounts.id = vaults.creatorId
+        WHERE vaults.isPrivate = false AND vaults.creatorId = '668ed565e9d5c2965d8c0059'

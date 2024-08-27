@@ -23,7 +23,7 @@ public class VaultKeepsController : ControllerBase
         // FIXME invalid auth for create vault keep expects a 400 but I am not sure where to get the data to determine whether or not you are the owner of the vaultkeep that you created????
         Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
         vaultKeepData.CreatorId = userInfo.Id;
-        VaultKeep vaultKeep = _vaultKeepsService.CreateVaultKeep(vaultKeepData);
+        VaultKeep vaultKeep = _vaultKeepsService.CreateVaultKeep(vaultKeepData, userInfo.Id);
         return Ok(vaultKeep);
       }
       catch (Exception exception)
@@ -39,6 +39,7 @@ public class VaultKeepsController : ControllerBase
     {
       try 
       {
+        
         Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
 
         string message = _vaultKeepsService.DeleteVaultKeep(vaultKeepId, userInfo.Id);

@@ -2,6 +2,7 @@
 
 
 
+
 namespace keepr.Repositories;
 
 public class VaultsRepository 
@@ -41,7 +42,7 @@ public class VaultsRepository
         _db.Execute(sql, new {vaultId});
     }
 
-    internal List<Vault> GetVaultsForAccount(string userId)
+    internal List<Vault> GetVaultsForOtherProfiles(string userId)
     {
         string sql = @"
         SELECT
@@ -49,7 +50,7 @@ public class VaultsRepository
         accounts.*
         FROM vaults
         JOIN accounts ON accounts.id = vaults.creatorId
-        WHERE vaults.creatorId = @userId
+        WHERE vaults.isPrivate = false AND vaults.creatorId = @userId
         ;";
 
         List<Vault> vaults = _db.Query<Vault, Profile, Vault>(sql, JoinCreator, new{userId}).ToList();
@@ -102,4 +103,19 @@ public class VaultsRepository
     vault.Creator = profile;
     return vault;
   }
+
+    internal List<Vault> GetMyAccountVaults(string userId)
+    {
+        string sql = @"
+        SELECT 
+        vaults.*,
+        accounts.*
+        FROM vaults
+        JOIN accounts ON accounts.id = vaults.creatorId
+        WHERE vaults.creatorId = @userId
+        ;";
+
+        List<Vault> vaults = _db.Query<Vault, Profile, Vault>(sql, JoinCreator, new {userId}).ToList();
+        return vaults;
+    }
 }

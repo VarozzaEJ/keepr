@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import EditAccountModal from '@/components/globals/EditAccountModal.vue';
 import KeepCard from '@/components/globals/KeepCard.vue';
 import VaultCard from '@/components/globals/VaultCard.vue';
 import { accountService } from '@/services/AccountService.js';
@@ -81,12 +82,9 @@ async function setActiveProfile(creatorId) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center">
-                                        <button class="btn w-75 d-flex justify-content-center mb-2 btn-danger"><i
-                                                class="mdi mdi-delete-forever">Delete</i></button>
-                                    </div>
-                                    <div class="col-12 d-flex justify-content-center">
-                                        <button class="btn w-75 text-center mb-1 btn-success"><i
-                                                class="mdi mdi-file"></i>Edit</button>
+                                        <button data-bs-toggle="modal" data-bs-target="#editAccountModal"
+                                            class="btn w-75 text-center mb-1 btn-success"><i
+                                                class="mdi mdi-file"></i>Edit Account</button>
                                     </div>
                                 </div>
                             </div>
@@ -227,6 +225,7 @@ async function setActiveProfile(creatorId) {
         </div>
         <div v-else><span class="fs-1">Loading ... <i class="mdi mdi-loading mdi-spin"></i></span></div>
     </div>
+    <EditAccountModal />
 </template>
 
 

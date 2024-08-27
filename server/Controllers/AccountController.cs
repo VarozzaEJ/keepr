@@ -25,37 +25,24 @@ public class AccountController : ControllerBase
   {
     try
     {
-      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext); 
       return Ok(_accountService.GetOrCreateAccount(userInfo));
     }
     catch (Exception e)
     {
       return BadRequest(e.Message);
     }
-  }
+  } 
 
-  [HttpGet("{profileId}")]
-  public ActionResult<Profile> GetProfileByProfileId(string profileId)
-  {
-    try 
-    {
-      Profile profile = _accountService.GetProfileByProfileId(profileId);
-      return Ok(profile);
-    }
-    catch (Exception exception)
-    {
-      return BadRequest(exception.Message);
-    }
-  }
-
-   [HttpGet("{creatorId}/vaults")]
-    public  ActionResult<List<Vault>> GetVaultsByCreatorId(string creatorId)
+    [HttpPut("update")]
+    [Authorize]
+    public async Task<ActionResult<Account>> UpdateAccount([FromBody] Account accountData)
     {
       try 
       {
-      List<Vault> vaults = _vaultsService.GetVaultsByCreatorId(creatorId);
-      return Ok(vaults);
-
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext); 
+      Account account = _accountService.Edit(accountData, userInfo.Id);
+      return Ok(account);
       }
       catch (Exception exception)
       {
@@ -63,13 +50,15 @@ public class AccountController : ControllerBase
       }
     }
 
-    [HttpGet("{profileId}/keeps")]
-    public ActionResult<List<Keep>> GetKeepsByProfileId(string profileId)
+    [HttpGet("vaults")]
+    [Authorize] //NOTE might not be needed depending on what my front end is looking for
+    public async Task<ActionResult<List<Vault>>> GetMyAccountVaults()
     {
       try 
       {
-      List<Keep> keeps = _keepsService.GetKeepsByProfileId(profileId);
-      return Ok(keeps);
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext); 
+      List<Vault> vaults = _vaultsService.GetMyAccountVaults(userInfo.Id);
+      return Ok(vaults);
       }
       catch (Exception exception)
       {
