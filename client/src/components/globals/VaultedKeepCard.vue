@@ -5,13 +5,17 @@ import { VaultKeepKeep } from '@/models/VaultKeep.js';
 import { accountService } from '@/services/AccountService.js';
 import { keepsService } from '@/services/KeepsService.js';
 import { vaultKeepService } from '@/services/VaultKeepService.js';
+import { vaultsService } from '@/services/VaultsService.js';
 import Pop from '@/utils/Pop.js';
-import { computed } from 'vue';
+import { computed, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 
 const props = defineProps({ keepProp: { type: VaultKeepKeep, required: true } })
 const account = computed(() => AppState.account)
 const activeProfile = computed(() => AppState.activeProfile)
+const route = useRoute()
+const activeVault = computed(() => AppState.activeVault)
 
 async function setActiveKeep(keepId) {
     try {
@@ -21,6 +25,9 @@ async function setActiveKeep(keepId) {
         Pop.error(error);
     }
 }
+
+
+
 
 async function setActiveProfile(creatorId) {
     try {
@@ -48,10 +55,16 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
 
 <template>
     <main class="container-fluid my-md-1 my-2 keep-bg-img dynamic-width text-dark">
-        <div class="d-flex justify-content-end"><i @click="deleteVaultKeep(keepProp.vaultKeepId, keepProp.id)"
-                v-if="account?.id == activeProfile?.id" role="button" class="mdi mdi-close-circle text-danger"
-                title="Remove vault from keep"></i>
+        <div v-if="account" class="d-flex justify-content-end">
+
+            <i @click="deleteVaultKeep(keepProp.vaultKeepId, keepProp.id)"
+                v-if="account.id == activeProfile?.id || account.id == activeVault.creatorId" role="button"
+                class="mdi mdi-close-circle text-danger" title="Remove vault from keep">
+            </i>
         </div>
+        <div v-else class="d-flex justify-content-end">
+        </div>
+
         <div class="row ">
             <div class="col-12">
                 <img role="button" @click="setActiveKeep(keepProp.id)" data-bs-toggle="modal"
