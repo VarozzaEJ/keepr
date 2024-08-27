@@ -16,7 +16,10 @@ const keeps = computed(() => AppState.profileKeeps)
 const account = computed(() => AppState.account)
 
 
-watch(() => route.params.profileId && AppState.account, () => {
+watch([
+    () => route.params.profileId,
+    () => AppState.account
+], () => {
     setActiveProfile(route.params.profileId)
     getVaultsByCreatorId(route.params.profileId)
     getKeepsByProfileId(route.params.profileId)

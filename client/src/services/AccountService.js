@@ -35,9 +35,9 @@ class AccountService {
     const keeps = response.data.map(keepPOJO => new Keep(keepPOJO))
     AppState.profileKeeps = keeps
   }
-  async setActiveProfile(creatorId) {
+  async setActiveProfile(profileId) {
     AppState.activeProfile = null
-    const response = await api.get(`api/profiles/${creatorId}`)
+    const response = await api.get(`api/profiles/${profileId}`)
     const profile = new Profile(response.data)
     AppState.activeProfile = profile
   }

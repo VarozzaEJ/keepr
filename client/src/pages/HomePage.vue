@@ -51,6 +51,7 @@ async function getAllKeeps() {
 
 .break-inside {
   break-inside: avoid;
+
 }
 
 @media screen and (max-width: 768px) {
