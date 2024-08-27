@@ -30,7 +30,7 @@ public class VaultKeepsRepository
         ;";
 
         VaultKeep vaultKeep = _db.Query<VaultKeep, Vault, Keep, VaultKeep>(sql, (vaultKeep, vault, keep) => {
-            vaultKeep.Id = vault.Id;
+            vaultKeep.VaultId = vault.Id;
             vaultKeep.KeepId = keep.Id;
             return vaultKeep;
         }, vaultKeepData).FirstOrDefault();
@@ -54,7 +54,7 @@ public class VaultKeepsRepository
         accounts.*
         FROM vaultKeeps
         JOIN accounts ON accounts.id = vaultKeeps.creatorId
-        WHERE vaultKeeps.vaultId = @vaultKeepId
+        WHERE vaultKeeps.id = @vaultKeepId
         ;";
 
         VaultKeep vaultKeep = _db.Query<VaultKeep, Profile, VaultKeep>(sql, (vaultKeep, profile) => {

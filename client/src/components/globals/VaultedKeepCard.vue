@@ -11,6 +11,7 @@ import { computed } from 'vue';
 
 const props = defineProps({ keepProp: { type: VaultKeepKeep, required: true } })
 const account = computed(() => AppState.account)
+const activeProfile = computed(() => AppState.activeProfile)
 
 async function setActiveKeep(keepId) {
     try {
@@ -48,7 +49,7 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
 <template>
     <main class="container-fluid my-md-1 my-2 keep-bg-img dynamic-width text-dark">
         <div class="d-flex justify-content-end"><i @click="deleteVaultKeep(keepProp.vaultKeepId, keepProp.id)"
-                v-if="account?.id == keepProp.creatorId" role="button" class="mdi mdi-close-circle text-danger"></i>
+                v-if="account?.id == activeProfile.id" role="button" class="mdi mdi-close-circle text-danger"></i>
         </div>
         <div class="row ">
             <div class="col-12">

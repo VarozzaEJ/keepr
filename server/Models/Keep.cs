@@ -11,6 +11,7 @@ public class Keep : RepoItem<int>
     public Profile Creator {get; set;}
 
     public int KeptCount { get; set; }
+    public int Kept { get; set; }
 
     public int VaultKeepId { get; set; }
 }

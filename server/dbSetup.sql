@@ -100,3 +100,13 @@ SELECT
       LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
       GROUP BY(keeps.id)
       ;
+
+      SELECT 
+        vaultKeeps.*,
+        accounts.*
+        FROM vaultKeeps
+        JOIN accounts ON accounts.id = vaultKeeps.creatorId
+        WHERE vaultKeeps.id = 288
+        ;
+
+        SELECT * FROM `vaultKeeps`;

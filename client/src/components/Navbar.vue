@@ -20,31 +20,33 @@ function toggleTheme() {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm shadow sticky-top navbar-dark bg-light px-3">
+  <nav class="navbar navbar-expand shadow sticky-top navbar-dark bg-light px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <p class="fs-4 mb-0 bg-info rounded-pill px-3 text-dark">Home</p>
       </div>
     </router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+    <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon text-dark"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <li>
-          <div v-if="account" class="dropdown">
-            <div data-bs-toggle="dropdown" role="button" class="btn dropdown-toggle text-dark lighten-30 selectable">
-              <span class="fs-4 ">Create <i class="mdi mdi-menu-down"></i> </span>
-            </div>
-            <ul class="dropdown-menu">
-              <li><span data-bs-toggle="modal" data-bs-target="#createKeepModal" class="dropdown-item">New Keep</span>
-              </li>
-              <li><span data-bs-toggle="modal" data-bs-target="#createVaultModal" class="dropdown-item">New Vault</span>
-              </li>
-            </ul>
+        <div v-if="account" class="dropdown">
+          <div data-bs-toggle="dropdown" class="btn dropdown-toggle text-dark lighten-30">
+            <span class="fs-4 ">Create</span>
           </div>
-        </li>
+          <ul class="dropdown-menu">
+            <div class="mx-4 mb-2">
+              <button data-bs-toggle="modal" data-bs-target="#createKeepModal" class="btn btn-outline-dark w-100">New
+                Keep</button>
+            </div>
+            <div class="mx-4">
+              <button data-bs-toggle="modal" data-bs-target="#createVaultModal" class="btn btn-outline-dark w-100">New
+                Vault</button>
+            </div>
+          </ul>
+        </div>
 
       </ul>
       <div class="me-5">
@@ -86,5 +88,9 @@ a:hover {
 
 .shadow {
   border-bottom: 2px 2px black solid;
+}
+
+li {
+  text-decoration: none;
 }
 </style>

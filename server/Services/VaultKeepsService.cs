@@ -6,6 +6,8 @@
 
 
 
+using System.Diagnostics;
+
 namespace keepr.Services;
 
 public class VaultKeepsService
@@ -30,8 +32,8 @@ public class VaultKeepsService
 
     internal string DeleteVaultKeep(int vaultKeepId, string userId)
     {
-      GetVaultKeepById(vaultKeepId, userId);
-      
+      VaultKeep vaultKeep = GetVaultKeepById(vaultKeepId, userId);
+      if(vaultKeep.CreatorId != userId) throw new Exception("You cannot delete a saved keep if you didn't create the vault");
       _vaultKeepsRepository.DeleteVaultKeep(vaultKeepId);
       string message = $"Keep was deleted from the vault";
       return message;
@@ -41,7 +43,6 @@ public class VaultKeepsService
     internal VaultKeep GetVaultKeepById(int vaultKeepId, string userId)
     {
       VaultKeep vaultKeep = _vaultKeepsRepository.GetVaultKeepById(vaultKeepId);
-      if(vaultKeep.CreatorId != userId) throw new Exception("You cannot delete a saved keep if you didn't create it");
       return vaultKeep;
     }
 }
