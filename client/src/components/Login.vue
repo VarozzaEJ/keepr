@@ -19,7 +19,7 @@ async function logout() {
     <button class="btn selectable text-info lighten-30 text-uppercase my-2 my-lg-0" @click="login" v-if="!identity">
       Login
     </button>
-    <div v-else>
+    <div v-else-if="account">
       <div class="dropdown my-2 my-lg-0">
         <div type="button" class=" border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
           <div v-if="account?.picture || identity?.picture">

@@ -51,7 +51,8 @@ public class KeepsController : ControllerBase
       try 
       {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      Keep keep = _keepsService.GetKeepById(keepId);
+      Keep keep = _keepsService.IncrementViews(keepId, userInfo?.Id);
+      
       return Ok(keep);
       }
       catch (Exception exception)
@@ -59,6 +60,8 @@ public class KeepsController : ControllerBase
         return BadRequest(exception.Message);
       }
     }
+
+    
 
     [HttpPut("{keepId}")]
     [Authorize]

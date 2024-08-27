@@ -19,7 +19,7 @@ class VaultKeepService {
     async getKeepsForPublicVault(vaultId) {
 
         const response = await api.get(`api/vaults/${vaultId}/keeps`)
-        const vaultKeeps = response.data.map(vaultKeepPOJO => new Keep(vaultKeepPOJO))
+        const vaultKeeps = response.data.map(vaultKeepPOJO => new VaultKeepKeep(vaultKeepPOJO))
         AppState.vaultKeeps = vaultKeeps
     }
 

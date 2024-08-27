@@ -7,6 +7,11 @@ import { Vault } from '@/models/Vault.js'
 import { Keep } from '@/models/Keep.js'
 
 class AccountService {
+  async getMyAccountVaults(profileId) {
+    const response = await api.get('account/vaults')
+    const profileVaults = response.data.map(vaultPOJO => new Vault(vaultPOJO))
+    AppState.profileVaults = profileVaults
+  }
   async updateAccount(accountData) {
     const response = await api.put('/account/update', accountData)
     AppState.activeProfile = new Profile(response.data)
@@ -20,8 +25,7 @@ class AccountService {
       .map(vaultPOJO => new Vault(vaultPOJO))
     AppState.publicProfileVaults = publicProfileVaults
 
-    const privateProfileVaults = response.data.map(vaultPOJO => new Vault(vaultPOJO))
-    AppState.profileVaults = privateProfileVaults
+    this.getMyAccountVaults()
 
   }
 

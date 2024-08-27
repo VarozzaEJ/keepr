@@ -12,19 +12,17 @@ import { computed, ref } from 'vue';
 const editableVaultData = ref({
     name: '',
     img: '',
-    description: '',
     isPrivate: false
 })
 const account = computed(() => AppState.account)
 
 async function createVault() {
     try {
-        debugger
         const newVault = await vaultsService.createVault(editableVaultData.value)
-        // Modal.getOrCreateInstance('#createVaultModal').hide()
+        Modal.getOrCreateInstance('#createVaultModal').hide()
         Pop.success("Success")
         accountService.getVaultsByCreatorId(account.value.id)
-        // router.push({ name: 'Vault Details', params: { vaultId: newVault.id } })
+        router.push({ name: 'Vault Details', params: { vaultId: newVault.id } })
 
     }
     catch (error) {
@@ -57,12 +55,7 @@ async function createVault() {
                                     id="Img" maxlength="3000">
                                 <label for="Img">Image Url</label>
                             </div>
-                            <div class="mb-5 form-floating">
-                                <textarea minlength="2" v-model="editableVaultData.description" rows="5"
-                                    style="height: 100px" class="form-control" placeholder=""
-                                    maxlength="1000"></textarea>
-                                <label for="Vault Description">Description</label>
-                            </div>
+
                             <div class="mb-3 form-check">
                                 <input v-model="editableVaultData.isPrivate" type="checkbox" class="form-check-input"
                                     id="isPrivate">

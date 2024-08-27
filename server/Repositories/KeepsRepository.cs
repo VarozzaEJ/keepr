@@ -52,6 +52,7 @@ public class KeepsRepository
       SET
       img = @Img,
       name = @Name,
+      views = @Views,
       description = @Description
       WHERE id = @Id LIMIT 1;
 
