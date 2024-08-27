@@ -124,14 +124,14 @@ async function setActiveProfile(creatorId) {
                 </div>
             </div>
             <div>
-                <div v-if="account.id == profile.id" class="row">
-                    <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
+                <div v-if="account.id == profile.id" class="row d-flex justify-content-center">
+                    <div v-for="vault in vaults" :key="vault.id" class="col-xl-3 col-md-6 col-sm-9">
                         <VaultCard :vaultProp="vault" />
                     </div>
                 </div>
 
-                <div v-else-if="account.id != profile.id" class="row">
-                    <div v-for="vault in publicVaults" :key="vault.id" class="col-md-3">
+                <div v-else-if="account.id != profile.id" class="row d-flex justify-content-center">
+                    <div v-for="vault in publicVaults" :key="vault.id" class="col-xl-3 col-md-6 col-sm-9">
                         <!-- Vault cards go here -->
                         <VaultCard :vaultProp="vault" />
                     </div>

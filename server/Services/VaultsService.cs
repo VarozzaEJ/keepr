@@ -40,7 +40,7 @@ public class VaultsService
     Vault vault = GetVaultById(vaultId);
     if (vault.CreatorId != userId && vault.IsPrivate == true)
     {
-      throw new Exception($"No vault found with the id of {vaultId} ");
+      throw new Exception($"No vault found with the id of {vaultId} 🅇");
     }
 
 

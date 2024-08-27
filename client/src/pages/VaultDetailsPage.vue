@@ -2,8 +2,10 @@
 import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/globals/KeepCard.vue';
 import VaultedKeepCard from '@/components/globals/VaultedKeepCard.vue';
+import { router } from '@/router.js';
 import { vaultKeepService } from '@/services/VaultKeepService.js';
 import { vaultsService } from '@/services/VaultsService.js';
+import Pop from '@/utils/Pop.js';
 import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -12,9 +14,22 @@ const vaultKeeps = computed(() => AppState.vaultKeeps)
 const route = useRoute()
 
 watch(() => route.params.vaultId, () => {
-    vaultsService.setActiveVault(route.params.vaultId)
+    getVaultById(route.params.vaultId)
     vaultKeepService.getKeepsForPublicVault(route.params.vaultId)
+
 }, { immediate: true })
+
+async function getVaultById(vaultId) {
+    try {
+        await vaultsService.getVaultById(vaultId)
+    }
+    catch (error) {
+        Pop.error(error);
+        if (error.response.data.includes('🅇')) {
+            router.push({ name: 'Home' })
+        }
+    }
+}
 </script>
 
 

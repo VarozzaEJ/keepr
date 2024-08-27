@@ -62,12 +62,13 @@ public class VaultsRepository
         string sql = @"
         SELECT 
         vaults.*,
+        COUNT(vaultKeeps.id) AS keepCount,
         accounts.*
-
         FROM vaults
         JOIN accounts ON accounts.id = vaults.creatorId
-
+        LEFT JOIN vaultKeeps ON vaultKeeps.vaultId = vaults.id
         WHERE vaults.id = @vaultId
+        GROUP BY (vaults.id)
         ;";
 
         Vault vault = _db.Query<Vault, Profile, Vault>(sql, JoinCreator, new {vaultId}).FirstOrDefault();

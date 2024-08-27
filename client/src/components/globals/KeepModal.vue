@@ -54,7 +54,7 @@ async function createVaultKeep() {
                                         <div class="col-4 mt-4 d-flex justify-content-between">
                                             <span class="fs-4"><i class="mdi mdi-eye me-2"></i>{{ keep.views }}</span>
                                             <span class="fs-4"><i class="mdi mdi-alpha-k-box-outline me-2"></i>{{
-                                                keep.kept }}</span>
+                                                keep.keptCount ? keep.Kept : keep.keptCount }}</span>
                                         </div>
                                     </div>
                                     <div class="row d-flex justify-content-center">
@@ -83,8 +83,12 @@ async function createVaultKeep() {
                                         </div>
                                         <div
                                             class="col-lg-5 col-12 mb-4 me-md-0 me-2 ps-md-2 justify-content-center ps-0 d-flex align-items-center">
-                                            <img class="img-fluid creator-picture " :src="keep.creator.picture"
-                                                :alt="keep.creator.name">
+                                            <RouterLink
+                                                :to="{ name: 'Profile', params: { profileId: keep.creator.id } }">
+                                                <img data-bs-toggle="modal" data-bs-target="#keepModal"
+                                                    class="img-fluid creator-picture " :src="keep.creator.picture"
+                                                    :alt="keep.creator.name">
+                                            </RouterLink>
                                             <span class=" ms-2 fs-5 me-2">{{ keep.creator.trimmedName
                                                 }}</span>
                                         </div>

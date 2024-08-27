@@ -13,9 +13,8 @@ class VaultsService {
         }
         return newVault
     }
-    async setActiveVault(vaultId) {
+    async setActiveVault(vault) {
         AppState.activeVault = null
-        const vault = await this.getVaultById(vaultId)
         AppState.activeVault = vault
     }
 
@@ -24,7 +23,7 @@ class VaultsService {
         AppState.activeVault = null
         const response = await api.get(`api/vaults/${vaultId}`)
         const vault = new Vault(response.data)
-        return vault
+        AppState.activeVault = vault
     }
 }
 

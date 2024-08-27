@@ -8,4 +8,5 @@ public class Vault : RepoItem<int>
     public bool? IsPrivate { get; set; }
     public string CreatorId { get; set; }
 public Profile Creator {get; set;}
+public int KeepCount { get; set; }
 }

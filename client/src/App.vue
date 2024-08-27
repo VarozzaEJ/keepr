@@ -7,6 +7,7 @@ import { computed } from 'vue';
 import CreateVaultModal from './components/globals/CreateVaultModal.vue';
 
 const screenHeight = computed(() => screenX) //maybe whats needed for moving the nav to the bottom of the screen on mobile
+//POSITION absolute the navbar on mobile??
 </script>
 
 <template>

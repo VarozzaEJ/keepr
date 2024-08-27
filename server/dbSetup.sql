@@ -16,10 +16,12 @@ CREATE TABLE keeps(
   description VARCHAR(1000) NOT NULL,
   img VARCHAR(1000) NOT NULL,
   views INT UNSIGNED DEFAULT 0 NOT NULL,
-  kept INT UNSIGNED NOT NULL Default 0,
   creatorId VARCHAR(255) NOT NULL,
   FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 );
+
+ALTER TABLE keeps
+  DROP COLUMN kept;
 
 CREATE TABLE vaults(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -65,6 +67,16 @@ SELECT
 * FROM `vaultKeeps` WHERE id = 1;
 
 SELECT 
+        vaults.*,
+        COUNT(vaultKeeps.id) AS keepCount,
+        accounts.*
+        FROM vaults
+        JOIN accounts ON accounts.id = vaults.creatorId
+        LEFT JOIN vaultKeeps ON vaultKeeps.vaultId = vaults.id
+        WHERE vaults.id = 241
+        GROUP BY (vaults.id)
+
+SELECT 
         vaultKeeps.*,
         accounts.*
         FROM vaultKeeps
@@ -77,4 +89,14 @@ SELECT
         accounts.*
         FROM vaults
         JOIN accounts ON accounts.id = vaults.creatorId
-        WHERE vaults.isPrivate = false AND vaults.creatorId = '668ed565e9d5c2965d8c0059'
+        WHERE vaults.isPrivate = false AND vaults.creatorId = '668ed565e9d5c2965d8c0059';
+
+        SELECT 
+      keeps.*,
+      COUNT(vaultKeeps.id) AS keptCount,
+      accounts.*
+      FROM keeps
+      JOIN accounts on accounts.id = keeps.creatorId
+      LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
+      GROUP BY(keeps.id)
+      ;
