@@ -17,7 +17,7 @@ public class VaultKeepsRepository
         string sql = @"
         INSERT INTO 
         vaultKeeps(keepId, vaultId, creatorId)
-        VALUES(@KeepId, @VaultId, @CreatorId);
+        VALUES(@KeepId, @VaultId, @CreatorId );
 
         SELECT
         vaultKeeps.*,

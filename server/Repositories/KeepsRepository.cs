@@ -90,10 +90,13 @@ public class KeepsRepository
       string sql = @"
       SELECT 
       keeps.*,
+      COUNT(vaultKeeps.id) AS keptCount,
       accounts.*
       FROM keeps
       JOIN accounts ON accounts.id = keeps.creatorId
+      LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
       WHERE keeps.id = @keepId
+      GROUP BY(keeps.id)
       ;";
 
       Keep keep = _db.Query<Keep, Profile, Keep>(sql, JoinCreator, new {keepId}).FirstOrDefault();

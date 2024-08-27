@@ -1,6 +1,6 @@
 import { logger } from "@/utils/Logger.js"
 import { api } from "./AxiosService.js"
-import { VaultKeepKeep } from "@/models/VaultKeep.js"
+import { VaultKeep, VaultKeepKeep } from "@/models/VaultKeep.js"
 import { AppState } from "@/AppState.js"
 import { Keep } from "@/models/Keep.js"
 import { keepsService } from "./KeepsService.js"
@@ -14,7 +14,6 @@ class VaultKeepService {
     }
     async createVaultKeep(vaultKeepData) {
         const response = await api.post('api/vaultkeeps', vaultKeepData)
-        return response
     }
     async getKeepsForPublicVault(vaultId) {
 

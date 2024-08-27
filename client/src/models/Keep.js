@@ -9,7 +9,6 @@ export class Keep extends DatabaseItem {
         this.img = data.img
         this.views = data.views
         this.keptCount = data.keptCount
-        this.Kept = data.Kept
         this.creatorId = data.creatorId
         this.creator = new Profile(data.creator)
         this.vaultKeepId = data.vaultKeepId

@@ -1,8 +1,10 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { router } from '@/router.js';
 import { accountService } from '@/services/AccountService.js';
 import { vaultKeepService } from '@/services/VaultKeepService.js';
 import Pop from '@/utils/Pop.js';
+import { Modal } from 'bootstrap';
 import { computed, onMounted, ref, watch } from 'vue';
 
 
@@ -23,7 +25,9 @@ const editableVaultData = ref({
 async function createVaultKeep() {
     try {
         editableVaultData.value.keepId = keep.value.id
-        const response = await vaultKeepService.createVaultKeep(editableVaultData.value)
+        await vaultKeepService.createVaultKeep(editableVaultData.value)
+        Modal.getOrCreateInstance("#keepModal").hide()
+        router.push({ name: 'Vault Details', params: { vaultId: editableVaultData.value.vaultId } })
         editableVaultData.value = {
             vaultId: 0,
             keepId: null
@@ -54,7 +58,7 @@ async function createVaultKeep() {
                                         <div class="col-4 mt-4 d-flex justify-content-between">
                                             <span class="fs-4"><i class="mdi mdi-eye me-2"></i>{{ keep.views }}</span>
                                             <span class="fs-4"><i class="mdi mdi-alpha-k-box-outline me-2"></i>{{
-                                                keep.keptCount ? keep.Kept : keep.keptCount }}</span>
+                                                keep.keptCount }}</span>
                                         </div>
                                     </div>
                                     <div class="row d-flex justify-content-center">
