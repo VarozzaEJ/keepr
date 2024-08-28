@@ -9,12 +9,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: loadPage('HomePage')
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: loadPage('AboutPage')
+    component: loadPage('HomePage'),
+    beforeEnter: authSettled
   },
   {
     path: '/:profileId',
@@ -28,12 +24,6 @@ const routes = [
     component: loadPage('VaultDetailsPage'),
     beforeEnter: authSettled
   },
-  // {
-  //   path: '/account',
-  //   name: 'Account',
-  //   component: loadPage('AccountPage'),
-  //   beforeEnter: authSettled,
-  // }
 ]
 
 export const router = createRouter({

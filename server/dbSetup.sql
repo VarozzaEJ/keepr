@@ -66,6 +66,11 @@ WHERE `vaultKeeps`.id = 1;
 SELECT
 * FROM `vaultKeeps` WHERE id = 1;
 
+ALTER TABLE vaults
+DROP COLUMN description;
+
+SELECT * From vaults;
+
 SELECT 
         vaults.*,
         COUNT(vaultKeeps.id) AS keepCount,

@@ -24,9 +24,6 @@ class AccountService {
       .filter(vault => vault.isPrivate == false)
       .map(vaultPOJO => new Vault(vaultPOJO))
     AppState.publicProfileVaults = publicProfileVaults
-
-    this.getMyAccountVaults()
-
   }
 
   async getKeepsByCreatorId(profileId) {

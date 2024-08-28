@@ -6,15 +6,19 @@ import { vaultKeepService } from '@/services/VaultKeepService.js';
 import Pop from '@/utils/Pop.js';
 import { Modal } from 'bootstrap';
 import { computed, onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 
 const keep = computed(() => AppState.activeKeep)
 const profileVaults = computed(() => AppState.profileVaults)
 const account = computed(() => AppState.account)
+const route = useRoute()
 
-watch(() => AppState.account, () => {
-    accountService.getVaultsByCreatorId(AppState.account.id)
-})
+// watch([
+//     () => AppState.account
+// ], () => {
+//     accountService.getMyAccountVaults()
+// })
 
 
 const editableVaultData = ref({
@@ -54,7 +58,8 @@ function setAltImg(event) {
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6  p-0">
-                                <img @error="setAltImg" class="img img-fluid mobile-height" :src="keep.img" alt="">
+                                <img @error="setAltImg" class="img img-fluid mobile-height"
+                                    :title="`The posted image from ${keep.creator.name}`" :src="keep.img" alt="">
                             </div>
                             <div class="col-md-6 d-flex mobile-height">
 

@@ -5,6 +5,7 @@ import { keepsService } from '@/services/KeepsService.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 import { waveform } from 'ldrs'
+import { accountService } from '@/services/AccountService.js';
 
 waveform.register()
 
@@ -14,6 +15,7 @@ const account = computed(() => AppState.account)
 
 onMounted(() => {
   getAllKeeps()
+  accountService.getMyAccountVaults()
 })
 
 
@@ -57,7 +59,6 @@ async function getAllKeeps() {
   }
 }
 
-.full-vh {}
 
 .break-inside {
   break-inside: avoid;

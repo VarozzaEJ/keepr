@@ -8,6 +8,8 @@ class KeepsService {
         const response = await api.delete(`api/keeps/${keepId}`)
         const foundKeep = AppState.keeps.findIndex(keep => keep.id == keepId)
         AppState.keeps.splice(foundKeep, 1)
+        const foundProfileKeep = AppState.profileKeeps.findIndex(keep => keep.id == keepId)
+        AppState.profileKeeps.splice(foundProfileKeep, 1)
     }
     async createKeep(editableKeepData) {
         AppState.activeKeep = null

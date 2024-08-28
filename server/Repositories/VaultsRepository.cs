@@ -18,8 +18,8 @@ public class VaultsRepository
     {
         string sql = @"
         INSERT INTO
-        vaults(name, description, img, isPrivate, creatorId)
-        VALUES(@Name, @Description, @Img, @IsPrivate, @CreatorId);
+        vaults(name, img, isPrivate, creatorId)
+        VALUES(@Name , @Img, @IsPrivate, @CreatorId);
 
         SELECT 
         vaults.*,

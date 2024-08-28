@@ -22,10 +22,11 @@ const account = computed(() => AppState.account)
 
 watch([
     () => route.params.profileId,
-    () => AppState.account
+    // () => AppState.account
 ], () => {
     setActiveProfile(route.params.profileId)
     getVaultsByCreatorId(route.params.profileId)
+    accountService.getMyAccountVaults()
     getKeepsByProfileId(route.params.profileId)
 }, { immediate: true })
 
@@ -35,7 +36,6 @@ watch([
 async function getVaultsByCreatorId(profileId) {
     try {
         accountService.getVaultsByCreatorId(profileId)
-
     }
     catch (error) {
         Pop.error(error);
@@ -70,20 +70,22 @@ async function setActiveProfile(creatorId) {
             <div class="col-12">
                 <div class=" h-50">
                     <img class="img-fluid img " :src="profile.coverImg"
-                        :alt="`A picture of ${profile.name}'s cover image'`" :title="`${profile.name}`">
+                        :alt="`A picture of ${profile.name}'s cover image'`" :title="`${profile.name}'s cover image`">
 
                 </div>
             </div>
 
             <div class="row d-flex justify-content-end">
                 <div class="col-md-2 col-5 d-flex justify-content-center">
-                    <img class="img-fluid creator-picture" :src="profile.picture" :alt="`A picture of ${profile.name}`">
+                    <img class="img-fluid creator-picture" :src="profile.picture" :title="`${profile.name}`"
+                        :alt="`A picture of ${profile.name}`">
 
                 </div>
                 <div class="col-md-5 col-3">
                     <div class="dropdown-center flex-grow-1 d-flex justify-content-end">
-                        <p v-if="account.id == profile.id" class="mdi mdi-dots-horizontal fs-1" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <p v-if="account.id == profile.id" title="Open Account Dropdown?"
+                            class="mdi mdi-dots-horizontal fs-1" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
 
                         </p>
                         <div class="dropdown-menu ">
