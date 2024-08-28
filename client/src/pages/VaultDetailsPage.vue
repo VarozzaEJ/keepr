@@ -8,6 +8,9 @@ import { vaultsService } from '@/services/VaultsService.js';
 import Pop from '@/utils/Pop.js';
 import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { waveform } from 'ldrs';
+
+waveform.register()
 
 const vault = computed(() => AppState.activeVault)
 const vaultKeeps = computed(() => AppState.vaultKeeps)
@@ -82,16 +85,19 @@ async function deleteVault() {
         </div>
     </div>
     <div v-else class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-4 d-flex justify-content-center">
-                <p class="text-center fs-1">Loading... <i class="mdi mdi-loading mdi-spin"></i></p>
-            </div>
+        <div class="d-flex justify-content-center align-items-center mt-4"><span class="large-text">Loading<l-waveform
+                    class="ms-5" l-waveform size="83" stroke="3.5" speed="1" color="black">
+                </l-waveform></span>
         </div>
     </div>
 </template>
 
 
 <style lang="scss" scoped>
+.large-text {
+    font-size: 70px;
+}
+
 .vault-bg-img {
     // background-image: v-bind('vault.vaultBackgroundImage');
     border-radius: 2%;

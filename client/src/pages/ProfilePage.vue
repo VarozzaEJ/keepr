@@ -7,6 +7,10 @@ import { accountService } from '@/services/AccountService.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted, watch, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
+import { waveform } from 'ldrs'
+
+waveform.register()
+
 
 const profile = computed(() => AppState.activeProfile)
 const route = useRoute()
@@ -135,7 +139,6 @@ async function setActiveProfile(creatorId) {
 
                 <div v-else-if="account.id != profile.id" class="row d-flex justify-content-center">
                     <div v-for="vault in publicVaults" :key="vault.id" class="col-xl-3 col-md-6 col-sm-9">
-                        <!-- Vault cards go here -->
                         <VaultCard :vaultProp="vault" />
                     </div>
                 </div>
@@ -178,14 +181,6 @@ async function setActiveProfile(creatorId) {
                         <div class="d-flex justify-content-center">
                             <span class="fw-bold fs-2">{{ profile.name }}</span>
                         </div>
-                        <!-- <div v-if="account.id == profile.id" class="d-flex justify-content-center">
-                            <span v-if="vaults.length > 1 || vaults.length == 0" class="me-2">{{ vaults.length }}
-                                Vaults</span>
-                            <span v-else-if="vaults.length == 1" class="me-2">{{ vaults.length }} Vault</span>
-                            <span>|</span>
-                            <span v-if="keeps.length > 1" class="ms-2"> {{ keeps.length }} Keeps</span>
-                            <span v-else class="ms-2"> {{ keeps.length }} Keep</span>
-                        </div> -->
                         <div class="d-flex justify-content-center">
                             <span v-if="publicVaults.length > 1 || publicVaults.length == 0" class="me-2">{{
                                 publicVaults.length }} Vaults</span>
@@ -208,7 +203,6 @@ async function setActiveProfile(creatorId) {
 
 
                 <div v-for="vault in publicVaults" :key="vault.id" class="col-md-3">
-                    <!-- Vault cards go here -->
                     <VaultCard :vaultProp="vault" />
                 </div>
 
@@ -228,13 +222,20 @@ async function setActiveProfile(creatorId) {
                 </div>
             </div>
         </div>
-        <div v-else><span class="fs-1">Loading ... <i class="mdi mdi-loading mdi-spin"></i></span></div>
+        <div class="d-flex justify-content-center align-items-center mt-4"><span class="large-text">Loading<l-waveform
+                    class="ms-5" l-waveform size="83" stroke="3.5" speed="1" color="black">
+                </l-waveform></span>
+        </div>
     </div>
     <EditAccountModal />
 </template>
 
 
 <style lang="scss" scoped>
+.large-text {
+    font-size: 70px;
+}
+
 .img {
     max-width: 100%;
     width: 100%;

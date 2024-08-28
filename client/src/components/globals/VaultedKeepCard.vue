@@ -27,7 +27,9 @@ async function setActiveKeep(keepId) {
 }
 
 
-
+function setAltImg(event) {
+    event.target.src = "https://images.unsplash.com/photo-1663465376645-aca0b7c8227a?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+}
 
 async function setActiveProfile(creatorId) {
     try {
@@ -67,7 +69,7 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
 
         <div class="row ">
             <div class="col-12">
-                <img role="button" @click="setActiveKeep(keepProp.id)" data-bs-toggle="modal"
+                <img @error="setAltImg" role="button" @click="setActiveKeep(keepProp.id)" data-bs-toggle="modal"
                     data-bs-target="#keepModal" class="img-fluid rounded img" :src="keepProp.img"
                     :alt="`A Keep made by ${keepProp.creator.name}`">
             </div>
@@ -75,8 +77,7 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
                 <span class=" ms-2 text-light text-shadow">{{ keepProp.name }}</span>
                 <router-link :to="{ name: 'Profile', params: { profileId: keepProp.creatorId } }">
                     <img @click="setActiveProfile(keepProp.creatorId)" role='button' class="creator-picture me-1"
-                        :src="keepProp.creator.picture" :alt="keepProp.creator.name"
-                        :title="`Navigate to ${keepProp.creator.name}'s page`">
+                        :src="keepProp.creator.picture" alt="" :title="`Navigate to ${keepProp.creator.name}'s page`">
                 </router-link>
             </div>
         </div>

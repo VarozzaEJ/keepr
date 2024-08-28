@@ -38,6 +38,10 @@ async function createVaultKeep() {
         Pop.error(error);
     }
 }
+
+function setAltImg(event) {
+    event.target.src = "https://images.unsplash.com/photo-1663465376645-aca0b7c8227a?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+}
 </script>
 
 
@@ -50,7 +54,7 @@ async function createVaultKeep() {
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6  p-0">
-                                <img class="img img-fluid mobile-height" :src="keep.img" alt="">
+                                <img @error="setAltImg" class="img img-fluid mobile-height" :src="keep.img" alt="">
                             </div>
                             <div class="col-md-6 d-flex mobile-height">
 
@@ -59,10 +63,12 @@ async function createVaultKeep() {
                                     <div class="row d-flex justify-content-center">
 
                                         <div class="col-4 mt-4 d-flex justify-content-between">
-                                            <span class="fs-4"><i class="mdi mdi-eye me-2"></i>{{ keep.views
-                                                }}</span>
-                                            <span class="fs-4"><i class="mdi mdi-alpha-k-box-outline me-2"></i>{{
-                                                keep.keptCount }}</span>
+                                            <span class="fs-4"><i title="Keep Views" class="mdi mdi-eye me-2"></i>{{
+                                                keep.views
+                                            }}</span>
+                                            <span class="fs-4"><i title="Times Keep was Vaulted"
+                                                    class="mdi mdi-alpha-k-box-outline me-2"></i>{{
+                                                        keep.keptCount }}</span>
                                         </div>
 
                                     </div>
@@ -94,9 +100,9 @@ async function createVaultKeep() {
                                             class="col-lg-5 col-12 mb-4 me-md-0 me-2 ps-md-2 justify-content-center ps-0 d-flex align-items-center">
                                             <RouterLink
                                                 :to="{ name: 'Profile', params: { profileId: keep.creator.id } }">
-                                                <img data-bs-toggle="modal" data-bs-target="#keepModal"
-                                                    class="img-fluid creator-picture " :src="keep.creator.picture"
-                                                    :alt="keep.creator.name">
+                                                <img title="Navigate to Profile Page" data-bs-toggle="modal"
+                                                    data-bs-target="#keepModal" class="img-fluid creator-picture "
+                                                    :src="keep.creator.picture" :alt="keep.creator.name">
                                             </RouterLink>
                                             <span class=" ms-2 fs-5 me-2">{{ keep.creator.trimmedName
                                                 }}</span>

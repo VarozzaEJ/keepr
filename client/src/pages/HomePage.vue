@@ -4,7 +4,9 @@ import KeepCard from '@/components/globals/KeepCard.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
+import { waveform } from 'ldrs'
 
+waveform.register()
 
 const keeps = computed(() => AppState.keeps)
 const account = computed(() => AppState.account)
@@ -35,10 +37,18 @@ async function getAllKeeps() {
         </div>
       </div>
     </div>
+    <div class="d-flex justify-content-center align-items-center mt-4"><span class="large-text">Loading<l-waveform
+          class="ms-5" l-waveform size="83" stroke="3.5" speed="1" color="black">
+        </l-waveform></span>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.large-text {
+  font-size: 70px;
+}
+
 @media screen and (min-width: 769px) {
   .masonry {
     columns: 4;
