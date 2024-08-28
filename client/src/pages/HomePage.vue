@@ -30,15 +30,15 @@ async function getAllKeeps() {
 
 <template>
   <div class="container-fluid full-vh">
-    <div class="row mt-3 full-vh">
+    <div v-if="keeps" class="row mt-3 full-vh">
       <div class="col-md-12 mobile-masonry  masonry">
         <div class="break-inside" v-for="keep in keeps" :key="keep.id">
           <KeepCard :keepProp='keep' />
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-center align-items-center mt-4"><span class="large-text">Loading<l-waveform
-          class="ms-5" l-waveform size="83" stroke="3.5" speed="1" color="black">
+    <div v-else class="d-flex justify-content-center align-items-center mt-4"><span
+        class="large-text">Loading<l-waveform class="ms-5" l-waveform size="83" stroke="3.5" speed="1" color="black">
         </l-waveform></span>
     </div>
   </div>

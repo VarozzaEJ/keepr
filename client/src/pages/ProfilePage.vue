@@ -227,7 +227,9 @@ async function setActiveProfile(creatorId) {
                 </l-waveform></span>
         </div>
     </div>
-    <EditAccountModal />
+    <div v-if="account">
+        <EditAccountModal />
+    </div>
 </template>
 
 

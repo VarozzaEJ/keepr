@@ -3,18 +3,18 @@ import { AppState } from '@/AppState.js';
 import { accountService } from '@/services/AccountService.js';
 import Pop from '@/utils/Pop.js';
 import { Modal } from 'bootstrap';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const account = computed(() => AppState.account)
 
 const editableAccountData = ref({
-    name: '',
-    // TODO pre place your account information so you don't have to put the url in every time, also, get a previewed picture
-    picture: '',
-    coverImg: '',
+    name: AppState.account.name,
+    // TODO pre place your account information so you don't have to put the url in every time
+    picture: AppState.account.picture,
+    coverImg: AppState.account.coverImg,
 
 })
-
+onMounted(() => { editableAccountData.value = { ...AppState.account } })
 async function updateAccount() {
     try {
         accountService.updateAccount(editableAccountData.value)
@@ -44,7 +44,7 @@ async function updateAccount() {
                             <div class="mb-3">
                                 <label for="name" class="form-label">Account Name</label>
                                 <input v-model="editableAccountData.name" type="text" class="form-control" id="name"
-                                    required maxlength="100">
+                                    :placeholder="account.name" required maxlength="100">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Image Preview</label>

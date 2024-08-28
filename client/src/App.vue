@@ -12,7 +12,6 @@ const screenHeight = computed(() => screenX) //maybe whats needed for moving the
 
 <template>
   <header class="sticky-top">
-
     <Navbar />
   </header>
   <main>
