@@ -44,7 +44,7 @@ function toggleTheme() {
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <label v-if="route.name == 'Home'" class="popup">
+        <label title="Open Menu" v-if="route.name == 'Home'" class="popup">
           <input type="checkbox">
           <div class="burger" tabindex="0">
             <span></span>
