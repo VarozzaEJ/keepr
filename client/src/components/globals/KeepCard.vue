@@ -52,14 +52,15 @@ async function deleteKeep(keepId) {
 
 
 <template>
-    <main class="container-fluid my-md-1 my-2 keep-bg-img dynamic-width text-dark">
+    <main class="container-fluid my-md-1 my-5 keep-bg-img dynamic-width text-dark">
         <!-- <div class="d-flex justify-content-end"><i @click="deleteKeep(keepProp.id)"
                 v-if="account?.id == keepProp.creatorId" role="button" title="Delete Keep?"
                 class="mdi mdi-close-circle text-danger"></i>
         </div> -->
         <div class="d-flex justify-content-end">
 
-            <button @click="deleteKeep(keepProp.id)" title=" Delete Keep?" class="bin-button">
+            <button v-if="account?.id == keepProp.creatorId" @click="deleteKeep(keepProp.id)" title=" Delete Keep?"
+                class="bin-button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 39 7" class="bin-top">
                     <line stroke-width="4" stroke="white" y2="5" x2="39" y1="5"></line>
                     <line stroke-width="3" stroke="white" y2="1.5" x2="26.0357" y1="1.5" x1="12"></line>

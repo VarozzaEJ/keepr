@@ -110,10 +110,10 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 
-@media screen and (min-width: 576px) {
-  .nav {
-    height: 64px;
-  }
+@media screen and (min-width: 576px) {}
+
+.nav {
+  height: 70px;
 }
 
 .shadow {

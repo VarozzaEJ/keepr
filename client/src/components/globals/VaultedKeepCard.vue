@@ -64,7 +64,8 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
                 class="mdi mdi-close-circle text-danger" title="Remove vault from keep">
             </i> -->
 
-            <button @click="deleteVaultKeep(keepProp.vaultKeepId, keepProp.id)" title="Remove Keep From Vault?"
+            <button v-if="account.id == activeProfile?.id || account.id == activeVault.creatorId"
+                @click="deleteVaultKeep(keepProp.vaultKeepId, keepProp.id)" title="Remove Keep From Vault?"
                 class="bin-button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 39 7" class="bin-top">
                     <line stroke-width="4" stroke="white" y2="5" x2="39" y1="5"></line>

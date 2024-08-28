@@ -64,16 +64,24 @@ function setAltImg(event) {
                             <div class="col-md-6 d-flex mobile-height">
 
                                 <div class="container d-flex flex-column justify-content-between">
+                                    <div>
 
-                                    <div class="row d-flex justify-content-center">
+                                        <div class="row d-flex justify-content-end">
+                                            <div class="col-2">
+                                                <i role="button" title="Close" data-bs-toggle="modal"
+                                                    class="mdi mdi-close fs-4"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-center">
 
-                                        <div class="col-4 mt-4 d-flex justify-content-between">
-                                            <span class="fs-4"><i title="Keep Views" class="mdi mdi-eye me-2"></i>{{
-                                                keep.views
-                                            }}</span>
-                                            <span class="fs-4"><i title="Times Keep was Vaulted"
-                                                    class="mdi mdi-alpha-k-box-outline me-2"></i>{{
-                                                        keep.keptCount }}</span>
+                                            <div class="col-4 mt-4 d-flex justify-content-between">
+                                                <span class="fs-4"><i title="Keep Views" class="mdi mdi-eye me-2"></i>{{
+                                                    keep.views
+                                                }}</span>
+                                                <span class="fs-4"><i title="Times Keep was Vaulted"
+                                                        class="mdi mdi-alpha-k-box-outline me-2"></i>{{
+                                                            keep.keptCount }}</span>
+                                            </div>
                                         </div>
 
                                     </div>
