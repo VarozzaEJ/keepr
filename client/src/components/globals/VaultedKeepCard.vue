@@ -110,10 +110,6 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
 
 
 <style lang="scss" scoped>
-// .img {
-//     height: 100%;
-// }
-
 .keep-bg-img {
     width: 100%;
     height: 100%;
