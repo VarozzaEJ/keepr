@@ -25,8 +25,6 @@ Usage
 Create a Keep: Tap the Hamburger menu in the navbar, then press the "New Keep" button, add your content, and save.
 Organize Keeps: Create a Vault by tapping the Hamburger menu, clicking the "New Vault" button, and then start adding your Keeps to it.
 Manage Profile: Visit your profile page to view and manage all of your Keeps and Vaults in one place.
-Contributing
-We welcome contributions to improve Keepr! If you have any suggestions, feature requests, or bug reports, please reach out to us at support@keeprapp.com.
 
 
 Thank you for using Keepr! Start organizing your ideas and memories today.
