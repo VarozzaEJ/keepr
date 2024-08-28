@@ -80,8 +80,7 @@ function toggleTheme() {
 
       </ul>
       <div class="me-md-5 me-2">
-        <img title="Our Logo" src="/Users/evanvarozza/source/codeworks/keepr/client/public/img/Keepr logo.png"
-          height="64px" width="64px" alt="">
+        <img title="Our Logo" src="@/assets/img/Keeprlogo.png" height="64px" width="64px" alt="">
       </div>
       <!-- LOGIN COMPONENT HERE -->
       <!-- <div>
