@@ -56,7 +56,7 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
 
 
 <template>
-    <main class="container-fluid my-md-1 my-2 keep-bg-img dynamic-width text-dark">
+    <main class="container-fluid my-md-1 my-2  dynamic-width text-dark">
         <div v-if="account" class="d-flex justify-content-end">
 
             <!-- <i @click="deleteVaultKeep(keepProp.vaultKeepId, keepProp.id)"
@@ -94,7 +94,7 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
         <div class="row ">
             <div class="col-12">
                 <img @error="setAltImg" role="button" @click="setActiveKeep(keepProp.id)" data-bs-toggle="modal"
-                    data-bs-target="#keepModal" class="img-fluid rounded img" :src="keepProp.img"
+                    data-bs-target="#keepModal" class="img-fluid rounded img keep-bg-img" :src="keepProp.img"
                     :alt="`A Keep made by ${keepProp.creator.name}`">
             </div>
             <div class="d-flex relative desktop-text mobile-text justify-content-between">
@@ -110,12 +110,11 @@ async function deleteVaultKeep(vaultKeepId, keepId) {
 
 
 <style lang="scss" scoped>
-.img {
-    height: 100%;
-}
+// .img {
+//     height: 100%;
+// }
 
 .keep-bg-img {
-    aspect-ratio: 1/1;
     width: 100%;
     height: 100%;
 }

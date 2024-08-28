@@ -52,7 +52,7 @@ async function deleteKeep(keepId) {
 
 
 <template>
-    <main class="container-fluid my-md-1 my-5 keep-bg-img dynamic-width text-dark">
+    <main class="container-fluid my-md-1 my-5  dynamic-width text-dark">
         <!-- <div class="d-flex justify-content-end"><i @click="deleteKeep(keepProp.id)"
                 v-if="account?.id == keepProp.creatorId" role="button" title="Delete Keep?"
                 class="mdi mdi-close-circle text-danger"></i>
@@ -84,9 +84,9 @@ async function deleteKeep(keepId) {
         </div>
 
         <div class="row ">
-            <div class="col-12">
+            <div class="col-12 ">
                 <img @error="setAltImg" role="button" @click="setActiveKeep(keepProp.id)" data-bs-toggle="modal"
-                    data-bs-target="#keepModal" class="img-fluid rounded img" :src="keepProp.img" alt="">
+                    data-bs-target="#keepModal" class="img-fluid keep-bg-img rounded img" :src="keepProp.img" alt="">
             </div>
             <div class="d-flex relative desktop-text mobile-text justify-content-between">
                 <span class=" ms-2 text-light text-shadow">{{ keepProp.name }}</span>
@@ -101,12 +101,15 @@ async function deleteKeep(keepId) {
 
 
 <style lang="scss" scoped>
-.img {
-    height: 100%;
+.full-height {
+    height: 100%
 }
 
+// .img {
+//     height: 100%;
+// }
+
 .keep-bg-img {
-    aspect-ratio: 1/1;
     width: 100%;
     height: 100%;
 }
