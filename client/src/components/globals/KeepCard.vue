@@ -86,7 +86,8 @@ async function deleteKeep(keepId) {
         <div class="row ">
             <div class="col-12 ">
                 <img @error="setAltImg" role="button" @click="setActiveKeep(keepProp.id)" data-bs-toggle="modal"
-                    data-bs-target="#keepModal" class="img-fluid keep-bg-img rounded img" :src="keepProp.img" alt="">
+                    data-bs-target="#keepModal" class="img-fluid bg-secondary keep-bg-img rounded img"
+                    :src="keepProp.img" alt="" height="700px" width="500px">
             </div>
             <div class="d-flex relative desktop-text mobile-text justify-content-between">
                 <span class=" ms-2 text-light text-shadow">{{ keepProp.name }}</span>
