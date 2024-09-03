@@ -1,4 +1,4 @@
-# Keepr [Visit Keepr](https://keepr.evanvarozza.dev/#/)
+# [Keepr](https://keepr.evanvarozza.dev/#/)
 
 Welcome to Keepr! Keepr is a versatile app designed to help you organize and store your thoughts, ideas, and memories. With Keepr, you can create and manage posts (Keeps) and organize them into visual collections called Vaults. This README will guide you through the basics of using Keepr and provide you with essential information to get started.
 
