@@ -81,7 +81,7 @@ For support and assistance, please contact me at [VarozzaEJ@gmail.com](mailto:Va
 
 ## Contributing
 
-We welcome contributions to Keepr! If you have suggestions or want to report bugs, please submit them through our [GitHub repository]([https://github.com/varozzaej/keepr](https://github.com/VarozzaEJ/keepr/discussions/1)).
+We welcome contributions to Keepr! If you have suggestions or want to report bugs, please submit them through the discussions tab in this repository.
 
 ---
 
