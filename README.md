@@ -1,7 +1,7 @@
 # Keepr
 
 Welcome to Keepr! Keepr is a versatile app designed to help you organize and store your thoughts, ideas, and memories. With Keepr, you can create and manage posts (Keeps) and organize them into visual collections called Vaults. This README will guide you through the basics of using Keepr and provide you with essential information to get started.
-![Keepr Homepage](https://cdn.discordapp.com/attachments/1130957592240332851/1280336417490210897/Screenshot2024-08-29at11.55.46_PM.png?ex=66d85e75&is=66d70cf5&hm=9b3fc8ea1205f279826c67c50ee4b30873b69dad078005f460af3df7cd82c9fa&logo.png] )
+![Keepr Homepage](https://cdn.discordapp.com/attachments/1130957592240332851/1280336417490210897/Screenshot2024-08-29at11.55.46_PM.png?ex=66d85e75&is=66d70cf5&hm=9b3fc8ea1205f279826c67c50ee4b30873b69dad078005f460af3df7cd82c9fa&logo.png)
 
 ## Table of Contents
 
