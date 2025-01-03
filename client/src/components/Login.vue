@@ -17,7 +17,7 @@ async function logout() {
 <template>
 
   <span class="navbar-text">
-    <button @click="login" v-if="!identity" class="btn btn-secondary">
+    <button v-if="!identity" class="btn btn-secondary" @touchstart="login" @click="login">
       <span class="shadow"></span>
       <span class="edge"></span>
       <span class="front">
